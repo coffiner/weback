@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XmlData>
+  <KeyValue Id="1" Key="UseXml" Value="false" Description="" UpdateTime="2013-04-23 02:18:18" />
+  <KeyValue Id="2" Key="HasInit" Value="true" Description="" UpdateTime="2013-04-23 02:18:24" />
+  <KeyValue Id="3" Key="WeChatName" Value="未来鸟" Description="" UpdateTime="2013-04-21 00:31:38" />
+  <KeyValue Id="4" Key="AccountName" Value="wlniao" Description="" UpdateTime="2013-04-21 00:31:38" />
+  <KeyValue Id="5" Key="Intro" Value="未来鸟立志于用创新的软件产品为行业领先的企业打造更强的竞争力！" Description="" UpdateTime="2013-04-21 00:31:38" />
+  <KeyValue Id="6" Key="WeChatToken" Value="" Description="" UpdateTime="2013-04-21 00:31:38" />
+  <KeyValue Id="7" Key="Subscribe" Value="你好，感谢你关注未来鸟软件！" Description="" UpdateTime="2013-04-21 00:31:38" />
+  <KeyValue Id="8" Key="NoMessage" Value="" Description="" UpdateTime="2013-04-21 00:31:38" />
+</XmlData>

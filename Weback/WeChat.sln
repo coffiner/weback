@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wlniao.WeChat", "Wlniao.WeChat\Wlniao.WeChat.csproj", "{ED9DE299-972D-402E-989E-4FDDC871D6CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeChat", "WeChat\WeChat.csproj", "{01696A99-F2B2-4CBA-8241-9737B98D0932}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wlniao.WeChat.Extend", "Wlniao.WeChat.Extend\Wlniao.WeChat.Extend.csproj", "{3DB71454-A650-44CE-9405-091DD2A9EAB6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ED9DE299-972D-402E-989E-4FDDC871D6CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED9DE299-972D-402E-989E-4FDDC871D6CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED9DE299-972D-402E-989E-4FDDC871D6CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED9DE299-972D-402E-989E-4FDDC871D6CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01696A99-F2B2-4CBA-8241-9737B98D0932}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01696A99-F2B2-4CBA-8241-9737B98D0932}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01696A99-F2B2-4CBA-8241-9737B98D0932}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01696A99-F2B2-4CBA-8241-9737B98D0932}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DB71454-A650-44CE-9405-091DD2A9EAB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DB71454-A650-44CE-9405-091DD2A9EAB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DB71454-A650-44CE-9405-091DD2A9EAB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DB71454-A650-44CE-9405-091DD2A9EAB6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

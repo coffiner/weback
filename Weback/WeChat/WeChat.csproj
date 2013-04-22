@@ -1,0 +1,498 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{01696A99-F2B2-4CBA-8241-9737B98D0932}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WeChat</RootNamespace>
+    <AssemblyName>WeChat</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MySql.Data">
+      <HintPath>..\..\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.Mobile" />
+    <Reference Include="XCore">
+      <HintPath>..\..\XCore.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Base\Setting.aspx" />
+    <Content Include="Base\Fans.aspx" />
+    <Content Include="Base\RulesAuto.aspx" />
+    <Content Include="Base\RulesForm.aspx" />
+    <Content Include="Base\RulesMethod.aspx" />
+    <Content Include="Base\Account.aspx" />
+    <Content Include="license.html" />
+    <Content Include="res\bootstrap.min.css" />
+    <Content Include="res\img\glyphicons-halflings-gray.png" />
+    <Content Include="res\img\icon-edit.png" />
+    <Content Include="res\wlniao-media.css" />
+    <Content Include="res\wlniao-style.css" />
+    <Content Include="Default.aspx" />
+    <Content Include="res\font-awesome\css\font-awesome.css" />
+    <Content Include="res\img\breadcrumb.png" />
+    <Content Include="res\img\glyphicons-halflings-white.png" />
+    <Content Include="res\img\gritter.png" />
+    <Content Include="res\img\hue.png" />
+    <Content Include="res\img\larrow.png" />
+    <Content Include="res\img\line.png" />
+    <Content Include="res\img\logo-big.png" />
+    <Content Include="res\img\logo.png" />
+    <Content Include="res\img\menu-active.png" />
+    <Content Include="res\img\rarrow.png" />
+    <Content Include="res\img\saturation.png" />
+    <Content Include="res\img\select2.png" />
+    <Content Include="res\img\spinner.gif" />
+    <Content Include="res\img\sprite.png" />
+    <Content Include="res\artDialog\jquery.artDialog.js" />
+    <Content Include="res\artDialog\jquery.artDialog.source.js" />
+    <Content Include="res\artDialog\license.txt" />
+    <Content Include="res\artDialog\plugins\iframeTools.js" />
+    <Content Include="res\artDialog\plugins\iframeTools.source.js" />
+    <Content Include="res\artDialog\skins\default.css" />
+    <Content Include="res\artDialog\skins\icons\error.png" />
+    <Content Include="res\artDialog\skins\icons\face-sad.png" />
+    <Content Include="res\artDialog\skins\icons\face-smile.png" />
+    <Content Include="res\artDialog\skins\icons\loading.gif" />
+    <Content Include="res\artDialog\skins\icons\question.png" />
+    <Content Include="res\artDialog\skins\icons\succeed.png" />
+    <Content Include="res\artDialog\skins\icons\warning.png" />
+    <Content Include="res\artDialog\skins\idialog.css" />
+    <Content Include="res\artDialog\skins\idialog\idialog_s.png" />
+    <Content Include="res\artDialog\skins\idialog\idialog_s2.png" />
+    <Content Include="res\artDialog\skins\idialog\ie6\aui_close.hover.png" />
+    <Content Include="res\artDialog\skins\idialog\ie6\aui_close.png" />
+    <Content Include="res\artDialog\skins\idialog\ie6\aui_e.png" />
+    <Content Include="res\artDialog\skins\idialog\ie6\aui_n.png" />
+    <Content Include="res\artDialog\skins\idialog\ie6\aui_ne.png" />
+    <Content Include="res\artDialog\skins\idialog\ie6\aui_nw.png" />
+    <Content Include="res\artDialog\skins\idialog\ie6\aui_s.png" />
+    <Content Include="res\artDialog\skins\idialog\ie6\aui_se.png" />
+    <Content Include="res\artDialog\skins\idialog\ie6\aui_sw.png" />
+    <Content Include="res\artDialog\skins\idialog\ie6\aui_w.png" />
+    <Content Include="res\artDialog\skins\simple.css" />
+    <Content Include="res\artDialog\skins\twitter.css" />
+    <Content Include="res\jquery.min.js" />
+    <Content Include="res\miniui\jquery-1.6.2.min.js" />
+    <Content Include="res\miniui\locale\en_US.js" />
+    <Content Include="res\miniui\locale\zh_CN.js" />
+    <Content Include="res\miniui\miniui.js" />
+    <Content Include="res\miniui\themes\default\images\buttonedit\button.png" />
+    <Content Include="res\miniui\themes\default\images\buttonedit\date.gif" />
+    <Content Include="res\miniui\themes\default\images\buttonedit\down.gif" />
+    <Content Include="res\miniui\themes\default\images\buttonedit\error.gif" />
+    <Content Include="res\miniui\themes\default\images\buttonedit\hover.png" />
+    <Content Include="res\miniui\themes\default\images\buttonedit\icon1.gif" />
+    <Content Include="res\miniui\themes\default\images\buttonedit\icon2.gif" />
+    <Content Include="res\miniui\themes\default\images\buttonedit\pressed.png" />
+    <Content Include="res\miniui\themes\default\images\buttonedit\up.gif" />
+    <Content Include="res\miniui\themes\default\images\buttonedit\_icon3.gif" />
+    <Content Include="res\miniui\themes\default\images\button\button.png" />
+    <Content Include="res\miniui\themes\default\images\button\disabled.png" />
+    <Content Include="res\miniui\themes\default\images\button\hover.png" />
+    <Content Include="res\miniui\themes\default\images\button\icons.png" />
+    <Content Include="res\miniui\themes\default\images\button\menu_arrow.png" />
+    <Content Include="res\miniui\themes\default\images\button\pressed.png" />
+    <Content Include="res\miniui\themes\default\images\button\split-allow-bottom.gif" />
+    <Content Include="res\miniui\themes\default\images\button\split_arrow.png" />
+    <Content Include="res\miniui\themes\default\images\calendar\button.png" />
+    <Content Include="res\miniui\themes\default\images\calendar\header.png" />
+    <Content Include="res\miniui\themes\default\images\calendar\months.gif" />
+    <Content Include="res\miniui\themes\default\images\calendar\next.gif" />
+    <Content Include="res\miniui\themes\default\images\calendar\prev.gif" />
+    <Content Include="res\miniui\themes\default\images\datepicker\date - 副本.gif" />
+    <Content Include="res\miniui\themes\default\images\datepicker\date.gif" />
+    <Content Include="res\miniui\themes\default\images\dragdrop\drop-add.gif" />
+    <Content Include="res\miniui\themes\default\images\dragdrop\drop-between.gif" />
+    <Content Include="res\miniui\themes\default\images\dragdrop\drop-no.gif" />
+    <Content Include="res\miniui\themes\default\images\dragdrop\drop-over.gif" />
+    <Content Include="res\miniui\themes\default\images\dragdrop\drop-under.gif" />
+    <Content Include="res\miniui\themes\default\images\dragdrop\drop-yes.gif" />
+    <Content Include="res\miniui\themes\default\images\gantt\arrow_blue_down.gif" />
+    <Content Include="res\miniui\themes\default\images\gantt\arrow_blue_left.gif" />
+    <Content Include="res\miniui\themes\default\images\gantt\arrow_blue_right.gif" />
+    <Content Include="res\miniui\themes\default\images\gantt\arrow_blue_up.gif" />
+    <Content Include="res\miniui\themes\default\images\gantt\arrow_red_down.gif" />
+    <Content Include="res\miniui\themes\default\images\gantt\arrow_red_left.gif" />
+    <Content Include="res\miniui\themes\default\images\gantt\arrow_red_right.gif" />
+    <Content Include="res\miniui\themes\default\images\gantt\arrow_red_up.gif" />
+    <Content Include="res\miniui\themes\default\images\gantt\baseline-milestone.gif" />
+    <Content Include="res\miniui\themes\default\images\gantt\collapse.gif" />
+    <Content Include="res\miniui\themes\default\images\gantt\constraint-finish.gif" />
+    <Content Include="res\miniui\themes\default\images\gantt\constraint-start.gif" />
+    <Content Include="res\miniui\themes\default\images\gantt\expand.gif" />
+    <Content Include="res\miniui\themes\default\images\gantt\finished.gif" />
+    <Content Include="res\miniui\themes\default\images\gantt\gvdp.gif" />
+    <Content Include="res\miniui\themes\default\images\gantt\header.gif" />
+    <Content Include="res\miniui\themes\default\images\gantt\header_bg.gif" />
+    <Content Include="res\miniui\themes\default\images\gantt\milestone-red.gif" />
+    <Content Include="res\miniui\themes\default\images\gantt\milestone.gif" />
+    <Content Include="res\miniui\themes\default\images\gantt\ms-task.gif" />
+    <Content Include="res\miniui\themes\default\images\gantt\notes.gif" />
+    <Content Include="res\miniui\themes\default\images\gantt\offday.gif" />
+    <Content Include="res\miniui\themes\default\images\gantt\summary-top.gif" />
+    <Content Include="res\miniui\themes\default\images\gantt\summary.gif" />
+    <Content Include="res\miniui\themes\default\images\gantt\summary2.gif" />
+    <Content Include="res\miniui\themes\default\images\gantt\taskbg.gif" />
+    <Content Include="res\miniui\themes\default\images\gantt\taskbg2.gif" />
+    <Content Include="res\miniui\themes\default\images\gantt\taskstatus.gif" />
+    <Content Include="res\miniui\themes\default\images\gantt\title_bg.png" />
+    <Content Include="res\miniui\themes\default\images\gantt\warning.png" />
+    <Content Include="res\miniui\themes\default\images\grid\collapse.gif" />
+    <Content Include="res\miniui\themes\default\images\grid\dirty.gif" />
+    <Content Include="res\miniui\themes\default\images\grid\expand.gif" />
+    <Content Include="res\miniui\themes\default\images\grid\footer.png" />
+    <Content Include="res\miniui\themes\default\images\grid\header.png" />
+    <Content Include="res\miniui\themes\default\images\grid\icons.png" />
+    <Content Include="res\miniui\themes\default\images\grid\loading.gif" />
+    <Content Include="res\miniui\themes\default\images\grid\resize.gif" />
+    <Content Include="res\miniui\themes\default\images\grid\sort_asc.gif" />
+    <Content Include="res\miniui\themes\default\images\grid\sort_desc.gif" />
+    <Content Include="res\miniui\themes\default\images\layout\east.gif" />
+    <Content Include="res\miniui\themes\default\images\layout\header.png" />
+    <Content Include="res\miniui\themes\default\images\layout\north.gif" />
+    <Content Include="res\miniui\themes\default\images\layout\south.gif" />
+    <Content Include="res\miniui\themes\default\images\layout\west.gif" />
+    <Content Include="res\miniui\themes\default\images\listbox\error.gif" />
+    <Content Include="res\miniui\themes\default\images\listbox\header.png" />
+    <Content Include="res\miniui\themes\default\images\menu\arrow.png" />
+    <Content Include="res\miniui\themes\default\images\menu\checked.gif" />
+    <Content Include="res\miniui\themes\default\images\menu\hallow.gif" />
+    <Content Include="res\miniui\themes\default\images\menu\hmenubg.png" />
+    <Content Include="res\miniui\themes\default\images\menu\item.png" />
+    <Content Include="res\miniui\themes\default\images\menu\menubg.gif" />
+    <Content Include="res\miniui\themes\default\images\menu\pressed.png" />
+    <Content Include="res\miniui\themes\default\images\messagebox\icon-error.gif" />
+    <Content Include="res\miniui\themes\default\images\messagebox\icon-info.gif" />
+    <Content Include="res\miniui\themes\default\images\messagebox\icon-question.gif" />
+    <Content Include="res\miniui\themes\default\images\messagebox\icon-warning.gif" />
+    <Content Include="res\miniui\themes\default\images\messagebox\loading.gif" />
+    <Content Include="res\miniui\themes\default\images\mygantt\header.png" />
+    <Content Include="res\miniui\themes\default\images\navbar\header.png" />
+    <Content Include="res\miniui\themes\default\images\pager\first.gif" />
+    <Content Include="res\miniui\themes\default\images\pager\last.gif" />
+    <Content Include="res\miniui\themes\default\images\pager\next.gif" />
+    <Content Include="res\miniui\themes\default\images\pager\prev.gif" />
+    <Content Include="res\miniui\themes\default\images\panel\header.png" />
+    <Content Include="res\miniui\themes\default\images\panel\resize.gif" />
+    <Content Include="res\miniui\themes\default\images\rgantt\bg.gif" />
+    <Content Include="res\miniui\themes\default\images\rgantt\cancel.gif" />
+    <Content Include="res\miniui\themes\default\images\rgantt\hdbg.gif" />
+    <Content Include="res\miniui\themes\default\images\rgantt\pc.gif" />
+    <Content Include="res\miniui\themes\default\images\rgantt\pc_03.gif" />
+    <Content Include="res\miniui\themes\default\images\splitter\buttons.gif" />
+    <Content Include="res\miniui\themes\default\images\splitter\mini-bottom.gif" />
+    <Content Include="res\miniui\themes\default\images\splitter\mini-left.gif" />
+    <Content Include="res\miniui\themes\default\images\splitter\mini-right.gif" />
+    <Content Include="res\miniui\themes\default\images\splitter\mini-top.gif" />
+    <Content Include="res\miniui\themes\default\images\splitter\resize.gif" />
+    <Content Include="res\miniui\themes\default\images\splitter\resize_h.gif" />
+    <Content Include="res\miniui\themes\default\images\supergrid\btn.gif" />
+    <Content Include="res\miniui\themes\default\images\supergrid\col-move-bottom.gif" />
+    <Content Include="res\miniui\themes\default\images\supergrid\col-move-top.gif" />
+    <Content Include="res\miniui\themes\default\images\supergrid\datagrid_header_bg.gif" />
+    <Content Include="res\miniui\themes\default\images\supergrid\datagrid_row_collapse.gif" />
+    <Content Include="res\miniui\themes\default\images\supergrid\datagrid_row_expand.gif" />
+    <Content Include="res\miniui\themes\default\images\supergrid\datagrid_sort_asc.gif" />
+    <Content Include="res\miniui\themes\default\images\supergrid\datagrid_sort_desc.gif" />
+    <Content Include="res\miniui\themes\default\images\supergrid\datagrid_title_bg.png" />
+    <Content Include="res\miniui\themes\default\images\supergrid\dirty.gif" />
+    <Content Include="res\miniui\themes\default\images\supergrid\header-hover.gif" />
+    <Content Include="res\miniui\themes\default\images\supergrid\header-pressed.gif" />
+    <Content Include="res\miniui\themes\default\images\supergrid\header.gif" />
+    <Content Include="res\miniui\themes\default\images\supergrid\invalid_line.gif" />
+    <Content Include="res\miniui\themes\default\images\supergrid\loading.gif" />
+    <Content Include="res\miniui\themes\default\images\supergrid\no.gif" />
+    <Content Include="res\miniui\themes\default\images\supergrid\ok.gif" />
+    <Content Include="res\miniui\themes\default\images\supergrid\rowselected.gif" />
+    <Content Include="res\miniui\themes\default\images\supergrid\row_collapse.gif" />
+    <Content Include="res\miniui\themes\default\images\supergrid\row_expand.gif" />
+    <Content Include="res\miniui\themes\default\images\supergrid\sort_asc.gif" />
+    <Content Include="res\miniui\themes\default\images\supergrid\sort_desc.gif" />
+    <Content Include="res\miniui\themes\default\images\supergrid\title_bg.png" />
+    <Content Include="res\miniui\themes\default\images\supergrid\——header.gif" />
+    <Content Include="res\miniui\themes\default\images\supertree\arrows.gif" />
+    <Content Include="res\miniui\themes\default\images\supertree\collapse.gif" />
+    <Content Include="res\miniui\themes\default\images\supertree\expand.gif" />
+    <Content Include="res\miniui\themes\default\images\supertree\file.gif" />
+    <Content Include="res\miniui\themes\default\images\supertree\folder-open.gif" />
+    <Content Include="res\miniui\themes\default\images\supertree\folder.gif" />
+    <Content Include="res\miniui\themes\default\images\supertree\loading.gif" />
+    <Content Include="res\miniui\themes\default\images\tabs\allow_left.gif" />
+    <Content Include="res\miniui\themes\default\images\tabs\allow_right.gif" />
+    <Content Include="res\miniui\themes\default\images\tabs\close.gif" />
+    <Content Include="res\miniui\themes\default\images\tabs\hover.png" />
+    <Content Include="res\miniui\themes\default\images\tabs\tab.png" />
+    <Content Include="res\miniui\themes\default\images\textboxlist\close.gif" />
+    <Content Include="res\miniui\themes\default\images\textboxlist\error.gif" />
+    <Content Include="res\miniui\themes\default\images\textboxlist\loading.gif" />
+    <Content Include="res\miniui\themes\default\images\textbox\error.gif" />
+    <Content Include="res\miniui\themes\default\images\toolbar\toolbar.png" />
+    <Content Include="res\miniui\themes\default\images\tools\close.gif" />
+    <Content Include="res\miniui\themes\default\images\tools\collapse.gif" />
+    <Content Include="res\miniui\themes\default\images\tools\expand.gif" />
+    <Content Include="res\miniui\themes\default\images\tools\max.gif" />
+    <Content Include="res\miniui\themes\default\images\tools\min.gif" />
+    <Content Include="res\miniui\themes\default\images\tools\refresh.gif" />
+    <Content Include="res\miniui\themes\default\images\tools\restore.gif" />
+    <Content Include="res\miniui\themes\default\images\tools\search.gif" />
+    <Content Include="res\miniui\themes\default\images\treegrid\collapse.gif" />
+    <Content Include="res\miniui\themes\default\images\treegrid\expand.gif" />
+    <Content Include="res\miniui\themes\default\images\treegrid\file.png" />
+    <Content Include="res\miniui\themes\default\images\treegrid\folder.gif" />
+    <Content Include="res\miniui\themes\default\images\treegrid\loading.gif" />
+    <Content Include="res\miniui\themes\default\images\tree\arrows.gif" />
+    <Content Include="res\miniui\themes\default\images\tree\button.png" />
+    <Content Include="res\miniui\themes\default\images\tree\collapse.gif" />
+    <Content Include="res\miniui\themes\default\images\tree\collapseLine.gif" />
+    <Content Include="res\miniui\themes\default\images\tree\expand.gif" />
+    <Content Include="res\miniui\themes\default\images\tree\expandLine.gif" />
+    <Content Include="res\miniui\themes\default\images\tree\file.png" />
+    <Content Include="res\miniui\themes\default\images\tree\firstAndlastcollapse.gif" />
+    <Content Include="res\miniui\themes\default\images\tree\firstAndlastexpand.gif" />
+    <Content Include="res\miniui\themes\default\images\tree\firstCollapseNode.gif" />
+    <Content Include="res\miniui\themes\default\images\tree\firstExpandNode.gif" />
+    <Content Include="res\miniui\themes\default\images\tree\folder-open.gif" />
+    <Content Include="res\miniui\themes\default\images\tree\folder.gif" />
+    <Content Include="res\miniui\themes\default\images\tree\hover.png" />
+    <Content Include="res\miniui\themes\default\images\tree\lastCollapseNode.gif" />
+    <Content Include="res\miniui\themes\default\images\tree\lastExpandNode.gif" />
+    <Content Include="res\miniui\themes\default\images\tree\lastline.gif" />
+    <Content Include="res\miniui\themes\default\images\tree\leaf.gif" />
+    <Content Include="res\miniui\themes\default\images\tree\loading.gif" />
+    <Content Include="res\miniui\themes\default\images\tree\treeline.gif" />
+    <Content Include="res\miniui\themes\default\images\tree\treeNodeLine.gif" />
+    <Content Include="res\miniui\themes\default\images\window\footer.png" />
+    <Content Include="res\miniui\themes\default\images\window\header.png" />
+    <Content Include="res\miniui\themes\default\images\_pager\first.gif" />
+    <Content Include="res\miniui\themes\default\images\_pager\last.gif" />
+    <Content Include="res\miniui\themes\default\images\_pager\next.gif" />
+    <Content Include="res\miniui\themes\default\images\_pager\prev.gif" />
+    <Content Include="res\miniui\themes\default\miniui.css" />
+    <Content Include="res\miniui\themes\icons.css" />
+    <Content Include="res\miniui\themes\icons\add.gif" />
+    <Content Include="res\miniui\themes\icons\addfolder.gif" />
+    <Content Include="res\miniui\themes\icons\addnew.gif" />
+    <Content Include="res\miniui\themes\icons\cancel.gif" />
+    <Content Include="res\miniui\themes\icons\cloud.png" />
+    <Content Include="res\miniui\themes\icons\cut.png" />
+    <Content Include="res\miniui\themes\icons\date.gif" />
+    <Content Include="res\miniui\themes\icons\downgrade.gif" />
+    <Content Include="res\miniui\themes\icons\download.gif" />
+    <Content Include="res\miniui\themes\icons\edit.gif" />
+    <Content Include="res\miniui\themes\icons\filter.gif" />
+    <Content Include="res\miniui\themes\icons\find.png" />
+    <Content Include="res\miniui\themes\icons\folder-open.gif" />
+    <Content Include="res\miniui\themes\icons\folder.gif" />
+    <Content Include="res\miniui\themes\icons\goto.gif" />
+    <Content Include="res\miniui\themes\icons\help.gif" />
+    <Content Include="res\miniui\themes\icons\help.png" />
+    <Content Include="res\miniui\themes\icons\lock.png" />
+    <Content Include="res\miniui\themes\icons\new.gif" />
+    <Content Include="res\miniui\themes\icons\no.png" />
+    <Content Include="res\miniui\themes\icons\node.png" />
+    <Content Include="res\miniui\themes\icons\noimage.gif" />
+    <Content Include="res\miniui\themes\icons\nowait.gif" />
+    <Content Include="res\miniui\themes\icons\ok.png" />
+    <Content Include="res\miniui\themes\icons\open.gif" />
+    <Content Include="res\miniui\themes\icons\print.gif" />
+    <Content Include="res\miniui\themes\icons\redo.gif" />
+    <Content Include="res\miniui\themes\icons\reload.png" />
+    <Content Include="res\miniui\themes\icons\remove.gif" />
+    <Content Include="res\miniui\themes\icons\save.gif" />
+    <Content Include="res\miniui\themes\icons\search.gif" />
+    <Content Include="res\miniui\themes\icons\sort.gif" />
+    <Content Include="res\miniui\themes\icons\split.gif" />
+    <Content Include="res\miniui\themes\icons\tip.png" />
+    <Content Include="res\miniui\themes\icons\undo.gif" />
+    <Content Include="res\miniui\themes\icons\unlock.gif" />
+    <Content Include="res\miniui\themes\icons\upgrade.gif" />
+    <Content Include="res\miniui\themes\icons\upload.gif" />
+    <Content Include="res\miniui\themes\icons\user.png" />
+    <Content Include="res\miniui\themes\icons\wait.gif" />
+    <Content Include="res\miniui\themes\icons\warning.png" />
+    <Content Include="res\miniui\themes\icons\zoomin.gif" />
+    <Content Include="res\miniui\themes\icons\zoomout.gif" />
+    <Content Include="res\miniui\themes\icons\_help.png" />
+    <Content Include="res\miniui\util.js" />
+    <Content Include="res\wlniao.js" />
+    <Content Include="res\select2.min.js" />
+    <Content Include="Login.aspx" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="WeChatApi.aspx" />
+    <Content Include="xcenter\template\default\_footer.html" />
+    <Content Include="xcenter\template\default\_header.html" />
+    <Content Include="xcenter\template\default\_loader.html" />
+    <Content Include="xcenter\template\default\_menu.html" />
+    <Content Include="xcenter\template\default\_meta.html" />
+    <Content Include="Main.aspx" />
+    <Content Include="使用说明.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Base\Setting.aspx.cs">
+      <DependentUpon>Setting.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Base\Setting.aspx.designer.cs">
+      <DependentUpon>Setting.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Base\Fans.aspx.cs">
+      <DependentUpon>Fans.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Base\Fans.aspx.designer.cs">
+      <DependentUpon>Fans.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Base\RulesAuto.aspx.cs">
+      <DependentUpon>RulesAuto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Base\RulesAuto.aspx.designer.cs">
+      <DependentUpon>RulesAuto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Base\RulesForm.aspx.cs">
+      <DependentUpon>RulesForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Base\RulesForm.aspx.designer.cs">
+      <DependentUpon>RulesForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Base\RulesMethod.aspx.cs">
+      <DependentUpon>RulesMethod.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Base\RulesMethod.aspx.designer.cs">
+      <DependentUpon>RulesMethod.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Base\Account.aspx.cs">
+      <DependentUpon>Account.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Base\Account.aspx.designer.cs">
+      <DependentUpon>Account.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\LoginPage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WeChatApi.aspx.cs">
+      <DependentUpon>WeChatApi.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WeChatApi.aspx.designer.cs">
+      <DependentUpon>WeChatApi.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Main.aspx.cs">
+      <DependentUpon>Main.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Main.aspx.designer.cs">
+      <DependentUpon>Main.aspx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Wlniao.WeChat.Extend\Wlniao.WeChat.Extend.csproj">
+      <Project>{3DB71454-A650-44CE-9405-091DD2A9EAB6}</Project>
+      <Name>Wlniao.WeChat.Extend</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Wlniao.WeChat\Wlniao.WeChat.csproj">
+      <Project>{ED9DE299-972D-402E-989E-4FDDC871D6CA}</Project>
+      <Name>Wlniao.WeChat</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="xcenter\lang\zh-cn\core.config" />
+    <Content Include="xcenter\conf\template.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="res\font-awesome\css\Descr.WD3" />
+    <Content Include="res\font-awesome\font\Descr.WD3" />
+    <Content Include="res\font-awesome\font\fontawesome-webfont.eot" />
+    <Content Include="res\font-awesome\font\fontawesome-webfont.eot%40" />
+    <Content Include="res\font-awesome\font\fontawesome-webfont.ttf" />
+    <Content Include="res\font-awesome\font\fontawesome-webfont.woff" />
+    <Content Include="xcenter\conf\log.config" />
+    <None Include="xcenter\conf\orm.config" />
+    <None Include="xcenter\conf\orm.config.mysql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="xcenter\data\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>20275</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

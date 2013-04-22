@@ -1,0 +1,1 @@
+﻿{ "ConnectionStringTable":{ "default":"Server=127.0.0.1;Port=3306;Database=wechat;Uid=root;Pwd=root"}, "DbType":{ "default":"mysql" }, "AssemblyList":["Wlniao.WeChat"], "IsCheckDatabase":true, "TablePrefix":"", "ContextCache":true, "ApplicationCache":false, "ApplicationCacheMinutes":0, "ApplicationCacheManager":"", "MetaDLL":"", "Mapping":[], "Interceptor":[  ] }
