@@ -129,3 +129,13 @@ $(document).ready(function () {
         $('#lightbox').hide(200);
     });
 });
+function getTextareaValue(text) {
+    var return_str = "";
+    if (text != "") {
+        var arr = text.split('<br/>');
+        for (i = 0; i < arr.length; i++) {
+            return_str += arr[i] + '\r\n';
+        }
+    }
+    return return_str;
+}

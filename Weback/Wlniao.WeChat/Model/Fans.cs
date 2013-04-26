@@ -23,7 +23,7 @@ namespace Wlniao.WeChat.Model
         /// <summary>
         /// 所绑定的用户Guid
         /// </summary>
-        [Column(Name = "StrGuid"), Unique("Guid不能重复"), NotNull("Guid不能为空")]
+        [Column(Name = "StrGuid", Length = 50), Unique("Guid不能重复"), NotNull("Guid不能为空")]
         public string Guid
         {
             get { return _Guid; }
@@ -33,6 +33,7 @@ namespace Wlniao.WeChat.Model
         /// <summary>
         /// 昵称
         /// </summary>
+        [Column(Length = 30)]
         public string NickName
         {
             get { return _NickName; }
@@ -42,6 +43,7 @@ namespace Wlniao.WeChat.Model
         /// <summary>
         /// 所绑定的用户Sid
         /// </summary>
+        [Column(Length = 50)]
         public string Sid
         {
             get { return _Sid; }
@@ -52,7 +54,7 @@ namespace Wlniao.WeChat.Model
         /// <summary>
         /// 微信OpenId
         /// </summary>
-        [Unique("微信OpenId不唯一")]
+        [Column(Length = 50),Unique("微信OpenId不唯一")]
         public string WeChatOpenId
         {
             get { return _WeChatOpenId; }
@@ -97,10 +99,20 @@ namespace Wlniao.WeChat.Model
             get { return _IsNewFans; }
             set { _IsNewFans = value; }
         }
+        private int _AllowTest;
+        /// <summary>
+        /// 是否允许使用测试功能
+        /// </summary>
+        public int AllowTest
+        {
+            get { return _AllowTest; }
+            set { _AllowTest = value; }
+        }
         private string _GoOnCmd;
         /// <summary>
         /// 正在继续的命令符
         /// </summary>
+        [LongText]
         public string GoOnCmd
         {
             get { return _GoOnCmd; }
@@ -110,6 +122,7 @@ namespace Wlniao.WeChat.Model
         /// <summary>
         /// 需要执行的方法（为空则直接回复内容）
         /// </summary>
+        [Column(Length = 50)]
         public string DoMethod
         {
             get { return _DoMethod; }
@@ -119,6 +132,7 @@ namespace Wlniao.WeChat.Model
         /// <summary>
         /// 除去命令符后的操作内容
         /// </summary>
+        [LongText]
         public string CmdContent
         {
             get { return _CmdContent; }
@@ -128,6 +142,7 @@ namespace Wlniao.WeChat.Model
         /// <summary>
         /// 回调内容
         /// </summary>
+        [Column(Length = 150)]
         public string CallBackText
         {
             get { return _CallBackText; }

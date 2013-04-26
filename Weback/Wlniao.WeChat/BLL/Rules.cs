@@ -18,7 +18,7 @@ namespace Wlniao.WeChat.BLL
 {
     public class Rules : System.ORM.CommonBase<Model.Rules>
     {
-        public static Result AddRules(string RuleName, string RuleCode, string SepType, string DoMethod, string ReContent, string RuleHelp, string CallBackText="")
+        public static Result AddRules(string RuleName, string RuleCode, string SepType, string DoMethod, string ReContent, string RuleHelp, string CallBackText = "", string SendMode="sendnew")
         {
             Result result = new Result();
             Model.Rules rules = new Model.Rules();
@@ -28,6 +28,7 @@ namespace Wlniao.WeChat.BLL
             rules.ReContent = ReContent;
             rules.RuleHelp = RuleHelp;
             rules.CallBackText = CallBackText;
+            rules.SendMode = SendMode;
             if (UseXml)
             {
                 result.Join(System.IO.XMLHelper.AddData(PathHelper.Map("~/xcenter/data/wechat/rules.xml"), "Rules", System.IO.XMLHelper.CreateInsertParameter("Guid", rules.Guid), System.IO.XMLHelper.CreateInsertParameter("RuleName", rules.RuleName), System.IO.XMLHelper.CreateInsertParameter("DoMethod", rules.DoMethod), System.IO.XMLHelper.CreateInsertParameter("ReContent", rules.ReContent), System.IO.XMLHelper.CreateInsertParameter("RuleHelp", rules.RuleHelp), System.IO.XMLHelper.CreateInsertParameter("CallBackText", rules.CallBackText)));
@@ -43,7 +44,7 @@ namespace Wlniao.WeChat.BLL
             }
             return result;
         }
-        public static Result AddRuleCode(string Code, string RuleGuid, string sepType)
+        public static Result AddRuleCode(string Code, string RuleGuid, string sepType, string Status = "normal")
         {
             List<Model.RuleCode> rulecodes = new List<Model.RuleCode>();
             if (string.IsNullOrEmpty(sepType))
@@ -75,6 +76,7 @@ namespace Wlniao.WeChat.BLL
             rulecode.Code = Code;
             rulecode.RuleGuid = RuleGuid;
             rulecode.SepType = sepType;
+            rulecode.Status = Status;
             rulecode.HitCount = list.Count;
             rulecode.HashCode = Encryptor.Md5Encryptor32(Code);
             _keywords = "";
@@ -87,7 +89,7 @@ namespace Wlniao.WeChat.BLL
                 return rulecode.insert();
             }
         }
-        public static Result EditRuleCode(string Guid, string Code, string RuleGuid, string sepType)
+        public static Result EditRuleCode(string Guid, string Code, string RuleGuid, string sepType, string Status)
         {
             Model.RuleCode rulecode = Model.RuleCode.findByField("StrGuid",Guid);
             if (rulecode == null && rulecode.Id <= 0)
@@ -125,6 +127,10 @@ namespace Wlniao.WeChat.BLL
             rulecode.RuleGuid = RuleGuid;
             rulecode.SepType = sepType;
             rulecode.HitCount = list.Count;
+            if (!string.IsNullOrEmpty(Status))
+            {
+                rulecode.Status = Status;
+            }
             rulecode.HashCode = Encryptor.Md5Encryptor32(Code);
             _keywords = "";
             if (UseXml)
@@ -156,7 +162,7 @@ namespace Wlniao.WeChat.BLL
             }
             return result;
         }
-        public static Result EditRules(string Guid, string RuleName, string RuleCode, string SepType, string DoMethod, string ReContent, string RuleHelp, string CallBackText)
+        public static Result EditRules(string Guid, string RuleName, string RuleCode, string SepType, string DoMethod, string ReContent, string RuleHelp, string CallBackText, string SendMode)
         {
             Result result = new Result();
             try
@@ -185,6 +191,7 @@ namespace Wlniao.WeChat.BLL
                     rules.ReContent = ReContent;
                     rules.RuleHelp = RuleHelp;
                     rules.CallBackText = CallBackText;
+                    rules.CallBackText = SendMode;
                     result.Join(rules.update());
                     if (result.IsValid)
                     {
@@ -238,11 +245,11 @@ namespace Wlniao.WeChat.BLL
         /// </summary>
         /// <param name="Code"></param>
         /// <returns></returns>
-        public static Model.Rules GetRuleByCode(string Code)
+        public static Model.Rules GetRuleByCode(string Code,string OpenId)
         {
             try
             {
-                return Get(GetRuleCode(Code, Code).RuleGuid);
+                return Get(GetRuleCode(Code, Code, OpenId).RuleGuid);
             }
             catch { return null; }
         }
@@ -251,15 +258,15 @@ namespace Wlniao.WeChat.BLL
         /// </summary>
         /// <param name="Text"></param>
         /// <returns></returns>
-        public static Model.Rules GetRuleByText(string Text)
+        public static Model.Rules GetRuleByText(string Text, string OpenId)
         {
             try
             {
-                return Get(GetRuleCode(Text.Split(new string[] { "$", "#" }, StringSplitOptions.RemoveEmptyEntries)[0], Text).RuleGuid);
+                return Get(GetRuleCode(Text.Split(new string[] { "$", "#" }, StringSplitOptions.RemoveEmptyEntries)[0], Text, OpenId).RuleGuid);
             }
             catch { return null; }
         }
-        public static Model.RuleCode GetRuleCode(string Code, string Text)
+        public static Model.RuleCode GetRuleCode(string Code, string Text, string OpenId)
         {
             Model.RuleCode rulecode = null;
             try
@@ -269,7 +276,7 @@ namespace Wlniao.WeChat.BLL
                     if (UseXml)
                     {
                         System.Xml.XmlNode xn = System.IO.XMLHelper.GetDataOne(PathHelper.Map("~/xcenter/data/wechat/rulecode.xml"), "RuleCode", System.IO.XMLHelper.CreateLikeParameter("Code", "#" + Code + "#"));
-                        if (xn != null)
+                        if (xn != null && xn.Attributes["Status"].Value != "close")
                         {
                             rulecode = new Model.RuleCode();
                             rulecode.Id = Convert.ToInt32(xn.Attributes["Id"].Value);
@@ -278,6 +285,7 @@ namespace Wlniao.WeChat.BLL
                             rulecode.Code = xn.Attributes["Code"].Value;
                             rulecode.RuleGuid = xn.Attributes["RuleGuid"].Value;
                             rulecode.SepType = xn.Attributes["SepType"].Value;
+                            rulecode.Status = xn.Attributes["Status"].Value;
                             try
                             {
                                 rulecode.HashCode = xn.Attributes["HashCode"].Value;
@@ -287,7 +295,7 @@ namespace Wlniao.WeChat.BLL
                     }
                     else
                     {
-                        rulecode = Model.RuleCode.findByField(false, true, System.Web.KeyValue.Create("Code", "#" + Code + "#"));
+                        rulecode = Model.RuleCode.find("Status <>'close' and Code like'%#" + Code + "#%'").first();
                     }
                 }
                 catch { }
@@ -306,7 +314,7 @@ namespace Wlniao.WeChat.BLL
                                 if (UseXml)
                                 {
                                     System.Xml.XmlNode xn = System.IO.XMLHelper.GetDataOne(PathHelper.Map("~/xcenter/data/wechat/rulecode.xml"), "RuleCode", System.IO.XMLHelper.CreateLikeParameter("Code", "$" + result.Errors[HitCount - 1] + "$"));
-                                    if (xn != null)
+                                    if (xn != null && xn.Attributes["Status"].Value != "close")
                                     {
                                         rulecode = new Model.RuleCode();
                                         rulecode.Id = Convert.ToInt32(xn.Attributes["Id"].Value);
@@ -315,6 +323,7 @@ namespace Wlniao.WeChat.BLL
                                         rulecode.Code = xn.Attributes["Code"].Value;
                                         rulecode.RuleGuid = xn.Attributes["RuleGuid"].Value;
                                         rulecode.SepType = xn.Attributes["SepType"].Value;
+                                        rulecode.Status = xn.Attributes["Status"].Value;
                                         try
                                         {
                                             rulecode.HashCode = xn.Attributes["HashCode"].Value;
@@ -324,7 +333,7 @@ namespace Wlniao.WeChat.BLL
                                 }
                                 else
                                 {
-                                    rulecode = Model.RuleCode.findByField(false, true, System.Web.KeyValue.Create("Code", "$" + result.Errors[HitCount - 1] + "$"));
+                                    rulecode = Model.RuleCode.find("Status <>'close' and Code like'%$" + Code + "$%'").first();
                                 }
                                 if (rulecode != null)
                                 {
@@ -341,19 +350,22 @@ namespace Wlniao.WeChat.BLL
                                     {
                                         rulecode = null;
                                     }
-                                    else
-                                    {
-                                        return rulecode;
-                                    }
                                 }
                             }
                             catch { }
                         }
-
                     }
                 }
             }
             catch { return null; }
+            try
+            {
+                if (rulecode != null && rulecode.Status == "test" && Fans.GetBy("WeChatOpenId", OpenId).AllowTest != 1)
+                {
+                    rulecode = null;
+                }
+            }
+            catch { }
             return rulecode;
         }
         private static string _keywords = "";
@@ -381,7 +393,7 @@ namespace Wlniao.WeChat.BLL
                         string[] codes = xn.Attributes["Code"].Value.Split(new string[] { sepType }, StringSplitOptions.RemoveEmptyEntries);
                         foreach (string code in codes)
                         {
-                            if (!string.IsNullOrEmpty(code))
+                            if (!string.IsNullOrEmpty(code) && !list.Contains(code))
                             {
                                 list.Add(code);
                             }
@@ -400,7 +412,7 @@ namespace Wlniao.WeChat.BLL
                         string[] codes = rc.Code.Split(new string[] { sepType }, StringSplitOptions.RemoveEmptyEntries);
                         foreach (string code in codes)
                         {
-                            if (!string.IsNullOrEmpty(code))
+                            if (!string.IsNullOrEmpty(code) && !list.Contains(code))
                             {
                                 list.Add(code);
                             }
@@ -423,6 +435,63 @@ namespace Wlniao.WeChat.BLL
                 }
                 return _UseXml == "true";
             }
+        }
+
+
+        public static Result AddRuleContent(string RuleGuid, string ContentType, string Title, string TextContent, string PicUrl, string ThumbPicUrl, string MusicUrl, string LinkUrl, string ContentStatus = "normal")
+        {
+            Model.RuleContent rulecontent = new Model.RuleContent();
+            rulecontent.Guid = Guid.NewGuid().ToString();
+            rulecontent.RuleGuid = RuleGuid;
+            rulecontent.ContentType = ContentType;
+            rulecontent.Title = Title;
+            rulecontent.TextContent = TextContent;
+            rulecontent.PicUrl = PicUrl;
+            if (string.IsNullOrEmpty(ThumbPicUrl))
+            {
+                ThumbPicUrl = PicUrl;
+            }
+            rulecontent.ThumbPicUrl = ThumbPicUrl;
+            rulecontent.MusicUrl = MusicUrl;
+            rulecontent.LinkUrl = LinkUrl;
+            rulecontent.ContentStatus = ContentStatus;
+            rulecontent.PushCount = 0;
+            return rulecontent.insert();
+        }
+        public static Result EditRuleContent(string Guid, string ContentType, string Title, string TextContent, string PicUrl, string ThumbPicUrl, string MusicUrl, string LinkUrl, string ContentStatus = "normal")
+        {
+            Model.RuleContent rulecontent = Model.RuleContent.findByField("StrGuid", Guid);
+            if (rulecontent == null && rulecontent.Id <= 0)
+            {
+                Result result = new Result();
+                result.Add("你操作的内容不存在或已删除！");
+                return result;
+            }
+            else
+            {
+                rulecontent.ContentType = ContentType;
+                rulecontent.Title = Title;
+                rulecontent.TextContent = TextContent;
+                rulecontent.PicUrl = PicUrl;
+                if (string.IsNullOrEmpty(ThumbPicUrl))
+                {
+                    ThumbPicUrl = PicUrl;
+                }
+                rulecontent.ThumbPicUrl = ThumbPicUrl;
+                rulecontent.MusicUrl = MusicUrl;
+                rulecontent.LinkUrl = LinkUrl;
+                rulecontent.ContentStatus = ContentStatus;
+                return rulecontent.update();
+            }
+        }
+        public static Result DelRuleContent(string Guid)
+        {
+            Result result = new Result();
+            if (Model.RuleContent.findByField("StrGuid", Guid).delete() <= 0)
+            {
+                result.Add("Sorry,内容删除失败");
+            }
+            return result;
         }
     }
 }

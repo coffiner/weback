@@ -83,7 +83,7 @@ namespace Wlniao.WeChat
                             try
                             {
                                 cmdstr = Content.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)[0];
-                                cmd = Wlniao.WeChat.BLL.Rules.GetRuleByCode(cmdstr);
+                                cmd = Wlniao.WeChat.BLL.Rules.GetRuleByCode(cmdstr, fromUser);
                             }
                             catch { }
                             if (cmd != null)
@@ -92,6 +92,63 @@ namespace Wlniao.WeChat
                                 if (!string.IsNullOrEmpty(cmd.DoMethod))
                                 {
                                     cmd.ReContent = RunMethod(cmd.DoMethod, fromUser, cmdstr, Content);
+                                }
+                                else if (string.IsNullOrEmpty(cmd.ReContent))
+                                {
+                                    string where = "RuleGuid='" + cmd.Guid + "'";
+                                    if (fans.AllowTest == 1)
+                                    {
+                                        where += " and (ContentStatus='normal' or ContentStatus='test')";
+                                    }
+                                    else
+                                    {
+                                        where += " and ContentStatus='normal'";
+                                    }
+
+                                    List<Wlniao.WeChat.Model.RuleContent> listAll = Wlniao.WeChat.Model.RuleContent.find(where + " order by LastStick desc").list();
+                                    List<Wlniao.WeChat.Model.RuleContent> listText = Wlniao.WeChat.Model.RuleContent.find(where + " and ContentType='text' order by LastStick desc").list();
+                                    List<Wlniao.WeChat.Model.RuleContent> listPicText = Wlniao.WeChat.Model.RuleContent.find(where + " and ContentType='pictext' order by LastStick desc").list();
+                                    List<Wlniao.WeChat.Model.RuleContent> listMusic = Wlniao.WeChat.Model.RuleContent.find(where + " and ContentType='music' order by LastStick desc").list();
+                                    if (cmd.SendMode == "sendgroup" && listPicText != null && listPicText.Count > 0)
+                                    {
+                                        cmd.ReContent = ResponsePicTextMsg(fromUser, toUser, listPicText);
+                                    }
+                                    else if (listAll.Count > 0)
+                                    {
+                                        int i = 0;
+                                        if (cmd.SendMode == "sendrandom")
+                                        {
+                                            i = new Random().Next(0, listAll.Count);
+                                        }
+                                        if (listAll[i].ContentType == "text")
+                                        {
+                                            cmd.ReContent = listAll[i].TextContent;
+                                            try
+                                            {
+                                                //更新推送次数
+                                                listAll[i].PushCount++;
+                                                listAll[i].update("PushCount");
+                                            }
+                                            catch { }
+                                        }
+                                        else if (listAll[i].ContentType == "music")
+                                        {
+                                            cmd.ReContent = ResponseMusicMsg(fromUser, toUser, listAll[i].Title, listAll[i].TextContent, listAll[i].MusicUrl, listAll[i].MusicUrl);
+                                            try
+                                            {
+                                                //更新推送次数
+                                                listAll[i].PushCount++;
+                                                listAll[i].update("PushCount");
+                                            }
+                                            catch { }
+                                        }
+                                        else if (listAll[i].ContentType == "pictext")
+                                        {
+                                            List<Wlniao.WeChat.Model.RuleContent> listTemp = new List<Model.RuleContent>();
+                                            listTemp.Add(listAll[i]);
+                                            cmd.ReContent = ResponsePicTextMsg(fromUser, toUser, listTemp);
+                                        }
+                                    }
                                 }
                                 Response.Write(ResponseTextMsg(fromUser, toUser, cmd.ReContent));
                             }
@@ -179,14 +236,122 @@ namespace Wlniao.WeChat
         /// <returns>生成的输出文本</returns>
         public static string ResponseTextMsg(string to, string from, string content)
         {
+            XmlDocument doc = new XmlDocument();
+            try
+            {
+                doc.LoadXml(content);
+                if(doc.InnerText.Length<50){
+                    doc = null;
+                }
+            }
+            catch { doc = null; }
+            if (doc == null)
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.AppendFormat("<xml>");
+                sb.AppendFormat("<ToUserName><![CDATA[{0}]]></ToUserName>", to);
+                sb.AppendFormat("<FromUserName><![CDATA[{0}]]></FromUserName>", from);
+                sb.AppendFormat("<CreateTime>{0}</CreateTime>", DateTools.GetNow().Ticks);
+                sb.AppendFormat("<MsgType><![CDATA[text]]></MsgType>");
+                sb.AppendFormat("<Content><![CDATA[{0}]]></Content>", content);
+                sb.AppendFormat("<FuncFlag>0</FuncFlag>");
+                sb.AppendFormat("</xml>");
+                return sb.ToString();
+            }
+            else
+            {
+                return doc.InnerXml;
+            }
+        }
+        /// <summary>
+        /// 回复图文内容
+        /// </summary>
+        /// <param name="to">接收者</param>
+        /// <param name="from">消息来源</param>
+        /// <param name="content">消息内容</param>
+        /// <returns>生成的输出文本</returns>
+        public static string ResponsePicTextMsg(string to, string from, List<Model.RuleContent> articles)
+        {
+            if (articles == null)
+            {
+                articles = new List<Model.RuleContent>();
+            }
+            int count = 0;
+            StringBuilder sbItems = new StringBuilder();
+            foreach (Model.RuleContent article in articles)
+            {
+                try
+                {
+                    if (string.IsNullOrEmpty(article.Title) || string.IsNullOrEmpty(article.PicUrl) || string.IsNullOrEmpty(article.TextContent))
+                    {
+                        continue;
+                    }
+                    StringBuilder sbTemp = new StringBuilder();
+                    sbTemp.AppendFormat("<item>");
+                    sbTemp.AppendFormat("   <Title><![CDATA[{0}]]></Title>", article.Title);
+                    sbTemp.AppendFormat("   <Description><![CDATA[{0}]]></Description>", article.TextContent);
+                    string urlTemp=article.PicUrl;
+                    if (count > 0)
+                    {
+                        urlTemp = string.IsNullOrEmpty(article.ThumbPicUrl) ? article.PicUrl : article.ThumbPicUrl;
+                    }
+                    sbTemp.AppendFormat("   <PicUrl><![CDATA[{0}]]></PicUrl>", urlTemp.Contains("http://") ? urlTemp : ApiUrl + urlTemp);
+                    sbTemp.AppendFormat("   <Url><![CDATA[{0}]]></Url>", article.LinkUrl);
+                    sbTemp.AppendFormat("   <FuncFlag>0</FuncFlag>");
+                    sbTemp.AppendFormat("</item>");
+                    sbItems.Append(sbTemp.ToString());
+                    count++;
+                    //更新推送次数
+                    article.PushCount++;
+                    article.update("PushCount");
+                    if (count == 9)
+                    {
+                        break;
+                    }
+                }
+                catch { }
+            }
+
+
             StringBuilder sb = new StringBuilder();
             sb.AppendFormat("<xml>");
             sb.AppendFormat("<ToUserName><![CDATA[{0}]]></ToUserName>", to);
             sb.AppendFormat("<FromUserName><![CDATA[{0}]]></FromUserName>", from);
             sb.AppendFormat("<CreateTime>{0}</CreateTime>", DateTools.GetNow().Ticks);
-            sb.AppendFormat("<MsgType><![CDATA[text]]></MsgType>");
-            sb.AppendFormat("<Content><![CDATA[{0}]]></Content>", content);
+            sb.AppendFormat("<MsgType><![CDATA[news]]></MsgType>");
+            sb.AppendFormat("<ArticleCount>{0}></ArticleCount>", count);
+            sb.AppendFormat("<Articles>");
+            sb.AppendFormat(sbItems.ToString());
+            sb.AppendFormat("</Articles>");
             sb.AppendFormat("<FuncFlag>0</FuncFlag>");
+            sb.AppendFormat("</xml>");
+            return sb.ToString();
+        }
+        /// <summary>
+        /// 回复音乐内容
+        /// </summary>
+        /// <param name="to">接收者</param>
+        /// <param name="from">消息来源</param>
+        /// <param name="title">标题</param>
+        /// <param name="description">描述信息</param>
+        /// <param name="musicurl">音乐链接</param>
+        /// <param name="hqmusicurl">高质量音乐链接，WIFI环境优先使用该链接播放音乐</param>
+        /// <returns>生成的输出文本</returns>
+        public static string ResponseMusicMsg(string to, string from, string title, string description, string musicurl, string hqmusicurl)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendFormat("<xml>");
+            sb.AppendFormat("<ToUserName><![CDATA[{0}]]></ToUserName>", to);
+            sb.AppendFormat("<FromUserName><![CDATA[{0}]]></FromUserName>", from);
+            sb.AppendFormat("<CreateTime>{0}</CreateTime>", DateTools.GetNow().Ticks);
+            sb.AppendFormat("<MsgType><![CDATA[music]]></MsgType>");
+            sb.AppendFormat("<Music>");
+            sb.AppendFormat("   <Title><![CDATA[{0}]]></Title>", title);
+            sb.AppendFormat("   <Description><![CDATA[{0}]]></Description>", description);
+            sb.AppendFormat("   <MusicUrl><![CDATA[{0}]]></MusicUrl>", musicurl.Contains("http://") ? musicurl : ApiUrl + musicurl);
+            sb.AppendFormat("   <HQMusicUrl><![CDATA[{0}]]></HQMusicUrl>", hqmusicurl.Contains("http://") ? hqmusicurl : ApiUrl + hqmusicurl);
+            sb.AppendFormat("   <FuncFlag>0</FuncFlag>");
+            sb.AppendFormat("</Music>");
             sb.AppendFormat("</xml>");
             return sb.ToString();
         }

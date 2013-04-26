@@ -22,6 +22,7 @@ namespace WeChat
                     Wlniao.WeChat.BLL.Rules.AddRules("Hello", "Hello", "#", "Wlniao.Hello", "", "Wlniao测试接口(如：Hello 未来鸟 机器人)");
                     Wlniao.WeChat.BLL.Rules.AddRules("HelloWorld", "HelloWorld", "#", "Wlniao.HelloWorld", "", "Wlniao测试接口(如：HelloWorld 你好!)");
                     Wlniao.WeChat.BLL.Rules.AddRules("在线翻译", "在线翻译", "#", "Wlniao.API", "", "在线翻译接口", "http://wxapi.azurewebsites.net/Translation.aspx");
+                    file.Delete(PathHelper.Map("~/xcenter/data/wechat/manager.xml"));
                     helper.Result = Wlniao.WeChat.BLL.Sys.Register(Request["username"], Request["password"], true);
                     if (helper.Result.IsValid)
                     {

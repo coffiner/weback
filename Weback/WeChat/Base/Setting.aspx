@@ -44,7 +44,7 @@
                                 <label class="control-label">
                                     欢迎词</label>
                                 <div class="controls">
-                                    <textarea id="Subscribe" class="span10" rows="8" cols="2"
+                                    <textarea id="Subscribe" class="span10" style=" min-width:300px;" rows="7" cols="2"
                                         placeholder="用户订阅时需要向用户发送的内容！"></textarea>
                                 </div>
                             </div>
@@ -52,7 +52,7 @@
                                 <label class="control-label">
                                     无匹配回复</label>
                                 <div class="controls">
-                                    <textarea id="NoMessage" class="span10" rows="8" cols="2"
+                                    <textarea id="NoMessage" class="span10" style=" min-width:300px;" rows="7" cols="2"
                                         placeholder="未执行任何规则时默认回复的内容！"></textarea>
                                 </div>
                             </div>
@@ -60,7 +60,7 @@
                                 <label class="control-label">
                                     简介</label>
                                 <div class="controls">
-                                    <textarea id="Intro" class="span10" rows="8" cols="2" data-form="wysihtml5"
+                                    <textarea id="Intro" class="span10" style=" min-width:300px;" rows="7" cols="2"
                                         placeholder="您可以在此设置机构的简单说明..."></textarea>
                                 </div>
                             </div>
@@ -111,9 +111,9 @@
             $('#WeChatName').val(json.WeChatName);
             $('#AccountName').val(json.AccountName);
             $('#WeChatToken').val(json.WeChatToken);
-            $('#Subscribe').val(json.Subscribe);
-            $('#NoMessage').val(json.NoMessage);
-            $('#Intro').val(json.Intro);
+            $('#Subscribe').val(getTextareaValue(json.Subscribe));
+            $('#NoMessage').val(getTextareaValue(json.NoMessage));
+            $('#Intro').val(getTextareaValue(json.Intro));
         });
     }
     init();

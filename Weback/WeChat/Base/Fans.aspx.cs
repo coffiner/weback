@@ -23,7 +23,9 @@ namespace WeChat.Base
                         }
                         else
                         {
-                            helper.Response("document.write('');");
+                            this.Response.ContentType = "application/x-javascript";
+                            this.Response.Write("document.write('');");
+                            this.Response.End();
                         }
                         break;
                     case "setnickname":
@@ -38,7 +40,41 @@ namespace WeChat.Base
                         }
                         if (fansNickName != null && fansNickName.Id > 0)
                         {
-                            helper.Result = fansNickName.update();
+                            try
+                            {
+                                fansNickName.update("NickName");
+                            }
+                            catch
+                            {
+                                helper.Result.Add("Sorry,更新订阅者信息失败！");
+                            }
+                        }
+                        helper.ResponseResult();
+                        break;
+                    case "setallowtest":
+                        Wlniao.WeChat.Model.Fans fansAllowtest = Wlniao.WeChat.Model.Fans.findByField("StrGuid", helper.GetParam("Guid"));
+                        if (fansAllowtest == null)
+                        {
+                            helper.Result.Add("Sorry,要更新的订阅者不存在或已删除！");
+                        }
+                        else
+                        {
+                            try
+                            {
+                                fansAllowtest.AllowTest = Convert.ToInt32(helper.GetParam("AllowTest"));
+                            }
+                            catch { }
+                        }
+                        if (fansAllowtest != null && fansAllowtest.Id > 0)
+                        {
+                            try
+                            {
+                                fansAllowtest.update("AllowTest");
+                            }
+                            catch
+                            {
+                                helper.Result.Add("Sorry,更新订阅者信息失败！");
+                            }
                         }
                         helper.ResponseResult();
                         break;
@@ -51,8 +87,12 @@ namespace WeChat.Base
                             pageSize = int.Parse(helper.GetParam("pageSize"));
                         }
                         catch { }
-
-                        System.DataPage<Wlniao.WeChat.Model.Fans> items = db.findPage<Wlniao.WeChat.Model.Fans>("Subscribe=1", pageIndex, pageSize);
+                        string where="Subscribe=1";
+                        if (!string.IsNullOrEmpty(helper.GetParam("key")))
+                        {
+                            where += " and NickName like'%" + helper.GetParam("key") + "%'";
+                        }
+                        System.DataPage<Wlniao.WeChat.Model.Fans> items = db.findPage<Wlniao.WeChat.Model.Fans>(where, pageIndex, pageSize);
 
                         try
                         {

@@ -56,7 +56,18 @@ namespace Wlniao.WeChat
         /// </summary>
         public String CmdContent
         {
-            get { return msgContent.Replace(cmd, "").Trim(); }
+            get
+            {
+                try
+                {
+                    if (msgContent.StartsWith(cmd))
+                    {
+                        msgContent = msgContent.Substring(cmd.Length).Trim();
+                    }
+                }
+                catch { }
+                return msgContent;
+            }
         }
         /// <summary>
         /// 标记当前流程执行成功
@@ -91,7 +102,7 @@ namespace Wlniao.WeChat
                 try
                 {
                     cmdstr = fans.CallBackText.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)[0];
-                    cmd = BLL.Rules.GetRuleByCode(cmdstr);
+                    cmd = BLL.Rules.GetRuleByCode(cmdstr, FromId);
                 }
                 catch { }
                 try
@@ -123,6 +134,10 @@ namespace Wlniao.WeChat
                     }
                 }
                 catch { }
+            }
+            else
+            {
+                BLL.Fans.SetSession(FromId, "", "", "", "");
             }
             return "";
         }

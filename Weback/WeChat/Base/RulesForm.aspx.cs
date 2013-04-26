@@ -10,6 +10,7 @@ namespace WeChat.Base
     public partial class RulesForm : LoginPage
     {
         protected string _Display = "";
+        protected string _DisplayNew = "";
         protected string _DoMethodDisplay = "";
         protected string _ReContentDisplay = "";
         protected string _GobackUrl = "#";
@@ -22,6 +23,10 @@ namespace WeChat.Base
                 if (string.IsNullOrEmpty(_Guid))
                 {
                     _Display = "display:none;";
+                }
+                else
+                {
+                    _DisplayNew = "display:none;";
                 }
                 if (helper.GetParam("type") == "auto")
                 {
@@ -41,6 +46,16 @@ namespace WeChat.Base
                         {
                             rulesGet = new Wlniao.WeChat.Model.Rules();
                         }
+                        try
+                        {
+                            rulesGet.ReContent = rulesGet.ReContent.Replace("\n", "<br/>");
+                        }
+                        catch { }
+                        try
+                        {
+                            rulesGet.RuleHelp = rulesGet.RuleHelp.Replace("\n", "<br/>");
+                        }
+                        catch { }
                         helper.Response(rulesGet);
                         break;
                     case "set":
@@ -52,9 +67,10 @@ namespace WeChat.Base
                         }
                         rulesSet.RuleName = helper.GetParam("RuleName");
                         rulesSet.DoMethod = helper.GetParam("DoMethod");
-                        rulesSet.ReContent = helper.GetParam("ReContent");
-                        rulesSet.RuleHelp = helper.GetParam("RuleHelp");
+                        rulesSet.ReContent = helper.GetParam("ReContent").Replace("<br/>", "\n");
+                        rulesSet.RuleHelp = helper.GetParam("RuleHelp").Replace("<br/>", "\n");
                         rulesSet.CallBackText = helper.GetParam("CallBackText");
+                        rulesSet.SendMode = helper.GetParam("SendMode");
                         if (rulesSet.Id > 0)
                         {
                             if (Tool.GetConfiger("UseXml") == "true")
@@ -94,7 +110,7 @@ namespace WeChat.Base
                         }
                         else
                         {
-                            helper.Result = Wlniao.WeChat.BLL.Rules.EditRuleCode(_Guid, helper.GetParam("Code"), helper.GetParam("RuleGuid") , helper.GetParam("SepType"));
+                            helper.Result = Wlniao.WeChat.BLL.Rules.EditRuleCode(_Guid, helper.GetParam("Code"), helper.GetParam("RuleGuid"), helper.GetParam("SepType"), helper.GetParam("Status"));
                         }
                         helper.ResponseResult();
                         break;
@@ -132,7 +148,68 @@ namespace WeChat.Base
                         {
                             rulecode.Code = rulecode.Code.Replace("#", " ").Replace("$", " ").TrimStart().TrimEnd().Replace(" ", ",");
                         }
-                        helper.Response("{total:" + items.RecordCount + ",data:" + Json.ToStringList(items.Results) + "}");
+                        helper.Response("{total:" + items.RecordCount + ",data:" + Json.ToStringList(list) + "}");
+                        break;
+                    case "setcontent":
+                        Wlniao.WeChat.Model.RuleContent codeContent = Wlniao.WeChat.Model.RuleContent.findByField("StrGuid", _Guid);
+                        if (codeContent == null)
+                        {
+                            helper.Result = Wlniao.WeChat.BLL.Rules.AddRuleContent(helper.GetParam("RuleGuid"), helper.GetParam("ContentType"), helper.GetParam("Title"), helper.GetParam("TextContent").Replace("<br/>", "\n"), helper.GetParam("PicUrl"), helper.GetParam("ThumbPicUrl"), helper.GetParam("MusicUrl"), helper.GetParam("LinkUrl"), helper.GetParam("ContentStatus"));
+                        }
+                        else
+                        {
+                            helper.Result = Wlniao.WeChat.BLL.Rules.EditRuleContent(_Guid, helper.GetParam("ContentType"), helper.GetParam("Title"), helper.GetParam("TextContent").Replace("<br/>", "\n"), helper.GetParam("PicUrl"), helper.GetParam("ThumbPicUrl"), helper.GetParam("MusicUrl"), helper.GetParam("LinkUrl"), helper.GetParam("ContentStatus"));
+                        }
+                        helper.ResponseResult();
+                        break;
+                    case "delcontent":
+                        try
+                        {
+                            if (Wlniao.WeChat.Model.RuleContent.findByField("StrGuid", helper.GetParam("Guid")).delete() <= 0)
+                            {
+                                helper.Result.Add("Sorry，删除内容失败！");
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            helper.Result.Add("错误：" + ex.Message);
+                        }
+                        helper.ResponseResult();
+                        break;
+                    case "stickcontent":
+                        try
+                        {
+                            var stick = Wlniao.WeChat.Model.RuleContent.findByField("StrGuid", helper.GetParam("Guid"));
+                            stick.LastStick = DateTools.GetNow();
+                            stick.update("LastStick");
+                        }
+                        catch (Exception ex)
+                        {
+                            helper.Result.Add("错误：" + ex.Message);
+                        }
+                        helper.ResponseResult();
+                        break;
+                    case "getcontentlist":
+                        pageIndex = 0;
+                        pageSize = int.MaxValue;
+                        try
+                        {
+                            pageIndex = int.Parse(helper.GetParam("pageIndex"));
+                            pageSize = int.Parse(helper.GetParam("pageSize"));
+                        }
+                        catch { }
+
+                        System.DataPage<Wlniao.WeChat.Model.RuleContent> itemsContent = db.findPage<Wlniao.WeChat.Model.RuleContent>("RuleGuid='" + helper.GetParam("RuleGuid") + "' order by LastStick desc", pageIndex, pageSize);
+                        List<Wlniao.WeChat.Model.RuleContent> listContent = itemsContent.Results;
+                        if (listContent == null)
+                        {
+                            listContent = new List<Wlniao.WeChat.Model.RuleContent>();
+                        }
+                        foreach (Wlniao.WeChat.Model.RuleContent rulecontent in listContent)
+                        {
+                            rulecontent.TextContent = rulecontent.TextContent.Replace("\n", "<br/>");
+                        }
+                        helper.Response("{total:" + itemsContent.RecordCount + ",data:" + Json.ToStringList(listContent) + "}");
                         break;
                     default:
                         break;

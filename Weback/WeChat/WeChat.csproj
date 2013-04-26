@@ -13,6 +13,7 @@
     <RootNamespace>WeChat</RootNamespace>
     <AssemblyName>WeChat</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -37,18 +38,25 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Web.Mobile" />
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="XCore">
       <HintPath>..\..\XCore.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Base\fulecodedemo.jpg" />
+    <Content Include="Base\fulecontentdemo.jpg" />
     <Content Include="Base\Setting.aspx" />
     <Content Include="Base\Fans.aspx" />
     <Content Include="Base\RulesAuto.aspx" />
@@ -59,6 +67,11 @@
     <Content Include="res\bootstrap.min.css" />
     <Content Include="res\img\glyphicons-halflings-gray.png" />
     <Content Include="res\img\icon-edit.png" />
+    <Content Include="res\jquery.jmp3.js" />
+    <Content Include="res\miniui\swfupload\swfupload.js" />
+    <Content Include="res\miniui\swfupload\swfupload.swf" />
+    <Content Include="res\miniui\swfupload\swfuploadbutton.swf" />
+    <Content Include="res\singlemp3player.swf" />
     <Content Include="res\wlniao-media.css" />
     <Content Include="res\wlniao-style.css" />
     <Content Include="Default.aspx" />
@@ -424,6 +437,9 @@
     <Compile Include="Properties\LoginPage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="upload.ashx.cs">
+      <DependentUpon>upload.ashx</DependentUpon>
+    </Compile>
     <Compile Include="WeChatApi.aspx.cs">
       <DependentUpon>WeChatApi.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -461,6 +477,7 @@
     <Content Include="res\font-awesome\font\fontawesome-webfont.ttf" />
     <Content Include="res\font-awesome\font\fontawesome-webfont.woff" />
     <Content Include="xcenter\conf\log.config" />
+    <Content Include="upload.ashx" />
     <None Include="xcenter\conf\orm.config" />
     <None Include="xcenter\conf\orm.config.mysql" />
   </ItemGroup>

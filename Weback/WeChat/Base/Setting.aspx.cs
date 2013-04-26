@@ -19,9 +19,9 @@ namespace WeChat.Base
                         helper.Add("WeChatName", System.Data.KvTableUtil.GetString("WeChatName"));
                         helper.Add("AccountName", System.Data.KvTableUtil.GetString("AccountName"));
                         helper.Add("WeChatToken", System.Data.KvTableUtil.GetString("WeChatToken"));
-                        helper.Add("Subscribe", System.Data.KvTableUtil.GetString("Subscribe"));
-                        helper.Add("NoMessage", System.Data.KvTableUtil.GetString("NoMessage"));
-                        helper.Add("Intro", System.Data.KvTableUtil.GetString("Intro"));
+                        helper.Add("Subscribe", System.Data.KvTableUtil.GetString("Subscribe").Replace("\n", "<br/>"));
+                        helper.Add("NoMessage", System.Data.KvTableUtil.GetString("NoMessage").Replace("\n", "<br/>"));
+                        helper.Add("Intro", System.Data.KvTableUtil.GetString("Intro").Replace("\n", "<br/>"));
                         helper.Response();
                         break;
                     case "set":

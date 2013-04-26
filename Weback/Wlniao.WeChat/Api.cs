@@ -24,6 +24,25 @@ namespace Wlniao.WeChat
 {
     public class Api : System.Web.UI.Page
     {
+        private static string _ApiUrl = "";
+        protected static string ApiUrl
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_ApiUrl))
+                {
+                    if (HttpContext.Current.Request.Url.Port == 80)
+                    {
+                        _ApiUrl = "http://" + HttpContext.Current.Request.Url.Host;
+                    }
+                    else
+                    {
+                        _ApiUrl = "http://" + HttpContext.Current.Request.Url.Host + ":" + HttpContext.Current.Request.Url.Port;
+                    }
+                }
+                return _ApiUrl;
+            }
+        }
         public string RunMethod(string method, String cmdForm, String cmdText, String msgText)
         {
             String content = "";             //方法执行结果

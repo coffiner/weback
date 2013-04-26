@@ -16,8 +16,8 @@
             <div class="row-fluid">
               <div class="span12">
                 <div class="widget-box">
-                     <div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
-                        <div style=" float:right; padding:3px;">
+                     <div class="widget-title">
+                        <div style="float:right; padding:3px;">
                             <a class="btn btn-primary" href="rulesform.aspx?type=auto">新建规则</a>
                         </div>
                         <h5>自动回复规则列表</h5>
@@ -28,7 +28,8 @@
                                 <div type="checkcolumn" width="18"></div>
                                 <div field="RuleName" width="120" headerAlign="center" align="left" allowSort="false" renderer="onRuleName">规则名称</div>
                                 <div field="ReContent" width="180" headerAlign="center" align="left" allowSort="false" renderer="onContent">回复内容</div>
-                                <div field="RuleHelp" width="360" headerAlign="center" align="left" allowSort="false" renderer="onContent">使用帮助</div>
+                                <div field="SendMode" width="60" headerAlign="center" align="center" allowSort="false" renderer="onSendMode">回复模式</div>
+                                <div field="RuleHelp" width="360" headerAlign="center" align="left" allowSort="false" renderer="onContent">规则描述</div>
                                 <div field="Guid" width="60" headerAlign="center" align="center" allowSort="false" renderer="onOp">操作</div>
                             </div>
                         </div>
@@ -93,8 +94,19 @@
     function onContent(e) {
         return e.value;
     }
+    function onSendMode(e) {
+        if (e.value == 'sendnew') {
+            return '<a style="color:gray;">顶部记录</a>';
+        } else if (e.value == 'sendrandom') {
+            return '<a style="color:gray;">随机</a>';
+        } else if (e.value == 'sendgroup') {
+            return '<a style="color:gray;">组合（仅图文）</a>';
+        } else {
+            return e.value;
+        }
+    }
     function onOp(e) {
-        return '<a href="javascript:edit(\'' + e.value + '\');">编辑</a>&nbsp;<a href="javascript:del(\'' + e.value + '\');">删除</a>';
+        return '<a href="javascript:edit(\'' + e.value + '\');">管理</a>&nbsp;<a href="javascript:del(\'' + e.value + '\');">删除</a>';
     }
 </script>
 </body>

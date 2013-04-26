@@ -9,6 +9,7 @@
 <div id="content" style="margin-top:-38px;"></div>
 <%= GetTemplate("_footer") %>
 <%= GetTemplate("_loader") %>
+<script type="text/javascript" src="http://tajs.qq.com/stats?sId=23924686" charset="UTF-8"></script>
 <script type="text/javascript">
     var frameid = "iframepage";
     function setFrameHeight(height) {

@@ -15,12 +15,15 @@
   <div id="content-header">
     <div id="breadcrumb"> <a href="/main.aspx" title="返回首页" class="tip-bottom"><i class="icon-home"></i>未来鸟微信平台</a> <a href="/base/fans.aspx" class="current">订阅者列表</a></div>   
   </div>
-
         <div class="container-fluid">
             <div class="row-fluid">
               <div class="span12">
                 <div class="widget-box">
-                     <div class="widget-title"> <span class="icon"><i class="icon-th"></i></span>
+                     <div class="widget-title">
+                        <div style=" width:300px; text-align:right; float:right; padding:3px;">
+                            <a class="btn btn-primary" href="javascript:Search();" style=" float:right;">筛选</a>
+                            <input type="text" class="grd-white" id="SearchKey" onchange="Search();" />
+                        </div>
                         <h5>我的微信订阅者</h5>
                     </div>
                     <div class="mini-fit" style="clear:both;height:560px;">
@@ -32,6 +35,7 @@
                                 <div field="SubscribeTime" width="98" headerAlign="center" align="center" align="center" allowSort="false" renderer="onDataRenderer">订阅时间</div>
                                 <div field="LastVisit" width="98" headerAlign="center" align="center" align="center" allowSort="false" renderer="onDataRendererLast">最后来访</div>
                                 <div field="Sid" width="60" headerAlign="center" align="center" allowSort="false" renderer="onBind">绑定状态</div>
+                                <div field="AllowTest" width="60" headerAlign="center" align="center" allowSort="false" renderer="onAllowTest">测试功能</div>
                             </div>
                         </div>
                     </div>
@@ -48,6 +52,9 @@
     mini.parse();
     var grid = mini.get("datagrid");
     grid.load();
+    function Search() {    
+        grid.load({ "key": $('#SearchKey').val() }); 
+    }
     function onDataRenderer(e) {
         return mini.formatDate(new Date(e.value), 'yyyy-MM-dd HH:mm:ss');
     }
@@ -96,6 +103,37 @@
         } else {
             return '未绑定';
         }
+    }
+    function onAllowTest(e) {
+        if (e.value == 1) {
+            return '<a class="aedit" style="color:green;" href="javascript:editAllowTest(\'' + e.record.Guid + '\',\'' + e.value + '\');">已开启</a>'
+        } else {
+            return '<a class="aedit" style="color:gray;" href="javascript:editAllowTest(\'' + e.record.Guid + '\',\'' + e.value + '\');">未开启</a>'
+        }
+    }
+    function editAllowTest(guid, allowtest) {
+        var msg = "您确定要为当前用户开启测试功能吗?";
+        if (allowtest == 1) {
+            allowtest = 0;
+            msg = "您确定要禁止当前用户使用测试功能吗?";
+        } else {
+            allowtest = 1;
+        }
+        $.dialog({
+            content: msg,
+            lock: true,
+            ok: function () {
+                $.getJSON("fans.aspx", { "action": "setallowtest", "Guid": guid, "AllowTest": allowtest }, function (json) {
+                    if (json.success) {
+                        grid.reload();
+                    } else {
+                        $.dialog.tips(json.msg);
+                    }
+                });
+            },
+            cancelVal: '取消',
+            cancel: true
+        });
     }
 </script>
 </body>

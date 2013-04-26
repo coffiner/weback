@@ -90,8 +90,8 @@ hr{ border-top-color:#dadada;}
 }
 #sidebar ul {
 	list-style: none;
-	margin: 0px 0 0;
-	padding: 0;
+	margin: 0px;
+	padding: 0px;
 	position: absolute;
 	width: 220px;
 }
@@ -1072,10 +1072,10 @@ form {
 }
 .form-horizontal .control-label {
 	padding-top: 15px;
-	width: 180px;
+	width: 160px;
+	padding-right:20px;
 }
 .form-horizontal .controls {
-	margin-left: 200px;
 	padding: 10px 0;
 }
 .form-horizontal input[type=text], .form-horizontal input[type=password], .form-horizontal textarea {
@@ -1454,9 +1454,6 @@ body {
 	left: -5px;
 	position: absolute;
 	top: 12px;
-}
-#sidebar a {
-	display: none !important;
 }
 #sidebar ul li.open.submenu a {
 	border-bottom: none !important;

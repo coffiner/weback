@@ -110,6 +110,7 @@
         <script src="/res/jquery.min.js"></script> 
         <script src="/res/artDialog/jquery.artDialog.js?skin=twitter" type="text/javascript"></script>
         <script src="/res/artDialog/plugins/iframeTools.js" type="text/javascript"></script>
+        <script type="text/javascript" src="http://tajs.qq.com/stats?sId=23924686" charset="UTF-8"></script>
         <script type="text/javascript">
             function KeyDownToGo(event) {
                 if (event.keyCode == 13) {
