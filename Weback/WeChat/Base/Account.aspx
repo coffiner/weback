@@ -1,12 +1,17 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Account.aspx.cs" Inherits="WeChat.Base.Account" %><!DOCTYPE html>
 <html lang="zh">
 <head>
-    <title>帐号设置-<%=UIConfig("AppName")%></title><%= GetTemplate("_meta") %>
+    <title>帐号设置-<%=UIConfig("AppName")%></title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="../res/bootstrap.min.css" />
+    <link rel="stylesheet" href="../res/wlniao-style.css" />
+    <link rel="stylesheet" href="../res/wlniao-media.css" />
+    <link rel="stylesheet" href="../res/font-awesome/css/font-awesome.css" />
 </head>
 <body>
 <div id="content" style=" margin:0px;">
   <div id="content-header">
-    <div id="breadcrumb"> <a href="/main.aspx" title="返回首页" class="tip-bottom"><i class="icon-home"></i>未来鸟微信平台</a> <a href="/base/Account.aspx" class="current">帐号设置</a></div>   
+    <div id="breadcrumb"> <a href="../main.aspx" title="返回首页" class="tip-bottom"><i class="icon-home"></i>未来鸟微信平台</a> <a href="../base/Account.aspx" class="current">帐号设置</a></div>   
   </div>
   <div class="container-fluid">
             <div class="row-fluid">
@@ -14,8 +19,7 @@
                     <div class="widget-box">
                         <div class="widget-title">
                             <span class="icon"><i class="icon-info-sign"></i></span>
-                            <h5>
-                                帐号设置:</h5>
+                            <h5>帐号设置:</h5>
                         </div>
                         <div class="widget-content nopadding">
                             <form class="form-horizontal" action="javascript:void(0);" style="height:520px;">
@@ -53,8 +57,10 @@
             </div>
   </div>
 </div>
-
-    <%= GetTemplate("_loader") %>
+<script src="../res/jquery.min.js"></script> 
+<script src="../res/wlniao.js"></script> 
+<script src="../res/artDialog/jquery.artDialog.js?skin=twitter" type="text/javascript"></script>
+<script src="../res/artDialog/plugins/iframeTools.js" type="text/javascript"></script>
 <script type="text/javascript">
     function submitForm() {
         if (!$('#Username').val()) {

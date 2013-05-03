@@ -30,13 +30,13 @@ namespace WeChat.Base
                 }
                 if (helper.GetParam("type") == "auto")
                 {
-                    _GobackUrl = "/base/rulesauto.aspx";
+                    _GobackUrl = "rulesauto.aspx";
                     _DoMethodDisplay = "display:none;";
                 }
                 else
                 {
                     _ReContentDisplay = "display:none;";
-                    _GobackUrl = "/base/rulesmethod.aspx";
+                    _GobackUrl = "rulesmethod.aspx";
                 }
                 switch (helper.GetParam("action").ToLower())
                 {

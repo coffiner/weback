@@ -1,10 +1,10 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="WeChat.Login" %><!DOCTYPE html>
 <html lang="en">    
 <head>
-    <title>Weback|微信公众帐号管理系统 - <%=UIConfig("AppName")%></title>
+    <title><%=_titleName%>|微信公众帐号管理系统 - <%=UIConfig("AppName")%></title>
     <meta charset="UTF-8" />
-    <link rel="stylesheet" href="/res/bootstrap.min.css" />
-    <link rel="stylesheet" href="/res/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="res/bootstrap.min.css" />
+    <link rel="stylesheet" href="res/font-awesome/css/font-awesome.css" />
     <style type="text/css">
         html, body {width: 100%;height: 100%;}
         body {overflow-x: hidden;margin-top: -10px;  font-family: 'Open Sans', sans-serif; font-size:12px; color:#666;}
@@ -58,7 +58,7 @@
 </head>
     <body>
         <div id="loginbox">
-			<div class="control-group normal_text"> <h3><img src="/res/img/logo-big.png" alt="Wlniao未来鸟软件" /></h3></div>
+			<div class="control-group normal_text"> <h3><img src="res/img/logo-big.png" alt="Wlniao未来鸟软件" /></h3></div>
         <%if (Tool.GetConfiger("HasInit") == "true")
           { %>
             <form id="loginform" class="form-vertical" action="javascript:void(0);" style="height:580px;">
@@ -107,9 +107,9 @@
             <%} %>
         </div>
         
-        <script src="/res/jquery.min.js"></script> 
-        <script src="/res/artDialog/jquery.artDialog.js?skin=twitter" type="text/javascript"></script>
-        <script src="/res/artDialog/plugins/iframeTools.js" type="text/javascript"></script>
+        <script src="res/jquery.min.js"></script> 
+        <script src="res/artDialog/jquery.artDialog.js?skin=twitter" type="text/javascript"></script>
+        <script src="res/artDialog/plugins/iframeTools.js" type="text/javascript"></script>
         <script type="text/javascript" src="http://tajs.qq.com/stats?sId=23924686" charset="UTF-8"></script>
         <script type="text/javascript">
             function KeyDownToGo(event) {

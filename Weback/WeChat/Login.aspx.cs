@@ -9,6 +9,7 @@ namespace WeChat
 {
     public partial class Login : System.TemplateEngine.PageBase
     {
+        protected string _titleName = System.Data.KvTableUtil.GetString("WeChatName");
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Request["do"] == "init")

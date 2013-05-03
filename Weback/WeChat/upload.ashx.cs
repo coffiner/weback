@@ -76,7 +76,7 @@ namespace WeChat
                     string serverFileName = toFilePath + fileName;
                     string serverFileNameThumb = toFilePath + "Thumb_" + fileName;
                     //物理完整路径                    
-                    string toFileFullPath = HttpContext.Current.Server.MapPath(toFilePath);
+                    string toFileFullPath = PathHelper.Map(toFilePath);
 
                     //检查是否有该路径  没有就创建
                     if (!Directory.Exists(toFileFullPath))

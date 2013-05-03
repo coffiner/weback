@@ -2,14 +2,18 @@
 <html lang="zh">
 <head>
     <title>基础设置-<%=UIConfig("AppName")%></title>
-    <%= GetTemplate("_meta") %>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="../res/bootstrap.min.css" />
+    <link rel="stylesheet" href="../res/wlniao-style.css" />
+    <link rel="stylesheet" href="../res/wlniao-media.css" />
+    <link rel="stylesheet" href="../res/font-awesome/css/font-awesome.css" />
     <link href="../res/miniui/themes/default/miniui.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 
 <div id="content" style=" margin:0px;">
   <div id="content-header">
-    <div id="breadcrumb"> <a href="/main.aspx" title="返回首页" class="tip-bottom"><i class="icon-home"></i>未来鸟微信平台</a> <a href="<%=_GobackUrl %>" title="点击返回规则列表" class="tip-bottom">规则列表</a> <a href="#" class="current">规则详细</a></div>   
+    <div id="breadcrumb"> <a href="../main.aspx" title="返回首页" class="tip-bottom"><i class="icon-home"></i>未来鸟微信平台</a> <a href="<%=_GobackUrl %>" title="点击返回规则列表" class="tip-bottom">规则列表</a> <a href="#" class="current">规则详细</a></div>   
   </div>
 
 <!--Action boxes-->
@@ -135,7 +139,7 @@
                                     图片</label>
                                 <div class="controls">
                                     <input type="text" id="PicUrl" style=" display:none;" />
-                                    <input id="swfUploadPic" class="mini-fileupload" name="Fdata" buttonText="浏览图片" limitSize="512KB" uploadOnSelect="true" limitType="*.png;*.jpg" flashUrl="/res/miniui/swfupload/swfupload.swf" uploadUrl="/upload.ashx?filetype=pic" onuploadsuccess="onUploadPicSuccess" />
+                                    <input id="swfUploadPic" class="mini-fileupload" name="Fdata" buttonText="浏览图片" limitSize="512KB" uploadOnSelect="true" limitType="*.png;*.jpg" flashUrl="../res/miniui/swfupload/swfupload.swf" uploadUrl="../upload.ashx?filetype=pic" onuploadsuccess="onUploadPicSuccess" />
                                     <%--<span>最大限制512KB</span>--%>
                                     <img id="imgPicUrl" src="#" style=" width:120px; height:60px; display:none;" />
                                 </div>
@@ -145,7 +149,7 @@
                                     小图</label>
                                 <div class="controls">
                                     <input type="text" id="ThumbPicUrl" style=" display:none;" />
-                                    <input id="swfUploadThumbPic" class="mini-fileupload" name="Fdata" buttonText="浏览图片" limitSize="256KB" uploadOnSelect="true" limitType="*.png;*.jpg" flashUrl="/res/miniui/swfupload/swfupload.swf" uploadUrl="/upload.ashx?filetype=pic" onuploadsuccess="onUploadThumbPicSuccess" />
+                                    <input id="swfUploadThumbPic" class="mini-fileupload" name="Fdata" buttonText="浏览图片" limitSize="256KB" uploadOnSelect="true" limitType="*.png;*.jpg" flashUrl="../res/miniui/swfupload/swfupload.swf" uploadUrl="../upload.ashx?filetype=pic" onuploadsuccess="onUploadThumbPicSuccess" />
                                     <%--<span>最大限制512KB</span>--%>
                                     <img id="imgThumbPicUrl" src="#" style=" width:52px; height:52px; display:none;" />
                                 </div>
@@ -247,8 +251,10 @@
             </div>
   </div>
 </div>
-
-    <%= GetTemplate("_loader") %>
+<script src="../res/jquery.min.js"></script> 
+<script src="../res/wlniao.js"></script> 
+<script src="../res/artDialog/jquery.artDialog.js?skin=twitter" type="text/javascript"></script>
+<script src="../res/artDialog/plugins/iframeTools.js" type="text/javascript"></script>
 <script src="../res/jquery.jmp3.js" type="text/javascript"></script>
 <script src="../res/miniui/miniui.js" type="text/javascript"></script>
 <script src="../res/miniui/swfupload/swfupload.js" type="text/javascript"></script>
@@ -543,14 +549,14 @@
         var stringArray = e.serverData.split("|");
         if (stringArray[0] == "1") {
             $("#PicUrl").val(stringArray[1]);
-            $('#imgPicUrl').attr('src', stringArray[1]).show();
+            $('#imgPicUrl').attr('src', '..' + stringArray[1]).show();
             if ($("#ThumbPicUrl").val() == '') {
                 if (stringArray.length > 3) {
                     $("#ThumbPicUrl").val(stringArray[3]);
-                    $('#imgThumbPicUrl').attr('src', stringArray[3]).show();
+                    $('#imgThumbPicUrl').attr('src', '..' + stringArray[3]).show();
                 } else {
                     $("#ThumbPicUrl").val(stringArray[1]);
-                    $('#imgThumbPicUrl').attr('src', stringArray[1]).show();
+                    $('#imgThumbPicUrl').attr('src', '..' + stringArray[1]).show();
                 }
             }
             art.dialog.tips(stringArray[2], 1);
@@ -564,7 +570,7 @@
         var stringArray = e.serverData.split("|");
         if (stringArray[0] == "1") {
             $("#ThumbPicUrl").val(stringArray[3]);
-            $('#imgThumbPicUrl').attr('src', stringArray[3]).show();
+            $('#imgThumbPicUrl').attr('src', '..' + stringArray[3]).show();
             art.dialog.tips(stringArray[2], 1);
             //this.setText("");
         }
@@ -601,14 +607,14 @@
             $('#divLinkUrl').show();
             $('#divTextContent').show();
             if (pic) {
-                $('#imgPicUrl').attr('src', pic).show();
+                $('#imgPicUrl').attr('src', '..' + pic).show();
             } else {
                 $('#imgPicUrl').attr('src', '#').hide();
             }
             if (thumbpic) {
-                $('#imgThumbPicUrl').attr('src', thumbpic).show();
+                $('#imgThumbPicUrl').attr('src', '..' + thumbpic).show();
             } else if (pic) {
-                $('#imgThumbPicUrl').attr('src', pic).show();
+                $('#imgThumbPicUrl').attr('src', '..' + pic).show();
             } else {
                 $('#imgThumbPicUrl').attr('src', '#').hide();
             }

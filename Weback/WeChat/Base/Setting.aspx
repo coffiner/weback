@@ -1,12 +1,17 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Setting.aspx.cs" Inherits="WeChat.Base.Setting" %><!DOCTYPE html>
 <html lang="zh">
 <head>
-    <title>基础设置-<%=UIConfig("AppName")%></title><%= GetTemplate("_meta") %>
+    <title>基础设置-<%=UIConfig("AppName")%></title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="../res/bootstrap.min.css" />
+    <link rel="stylesheet" href="../res/wlniao-style.css" />
+    <link rel="stylesheet" href="../res/wlniao-media.css" />
+    <link rel="stylesheet" href="../res/font-awesome/css/font-awesome.css" />
 </head>
 <body>
 <div id="content" style=" margin:0px;">
   <div id="content-header">
-    <div id="breadcrumb"> <a href="/main.aspx" title="返回首页" class="tip-bottom"><i class="icon-home"></i>未来鸟微信平台</a> <a href="/base/setting.aspx" class="current">基础设置</a></div>   
+    <div id="breadcrumb"> <a href="../main.aspx" title="返回首页" class="tip-bottom"><i class="icon-home"></i>未来鸟微信平台</a> <a href="../base/setting.aspx" class="current">基础设置</a></div>   
   </div>
   <div class="container-fluid">
             <div class="row-fluid">
@@ -77,8 +82,10 @@
             </div>
   </div>
 </div>
-
-    <%= GetTemplate("_loader") %>
+<script src="../res/jquery.min.js"></script> 
+<script src="../res/wlniao.js"></script> 
+<script src="../res/artDialog/jquery.artDialog.js?skin=twitter" type="text/javascript"></script>
+<script src="../res/artDialog/plugins/iframeTools.js" type="text/javascript"></script>
 <script type="text/javascript">
     function submitForm() {
         $.getJSON("setting.aspx", { "action": "set"

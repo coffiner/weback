@@ -2,14 +2,18 @@
 <html lang="zh">
 <head>
     <title>代码处理规则列表-<%=UIConfig("AppName")%></title>
-    <%= GetTemplate("_meta") %>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="../res/bootstrap.min.css" />
+    <link rel="stylesheet" href="../res/wlniao-style.css" />
+    <link rel="stylesheet" href="../res/wlniao-media.css" />
+    <link rel="stylesheet" href="../res/font-awesome/css/font-awesome.css" />
     <link href="../res/miniui/themes/default/miniui.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 
 <div id="content" style=" margin:0px;">
   <div id="content-header">
-    <div id="breadcrumb"> <a href="/main.aspx" title="返回首页" class="tip-bottom"><i class="icon-home"></i>未来鸟微信平台</a> <a href="/base/rulesmethod.aspx" class="current">代码处理规则</a></div>   
+    <div id="breadcrumb"> <a href="../main.aspx" title="返回首页" class="tip-bottom"><i class="icon-home"></i>未来鸟微信平台</a> <a href="../base/rulesmethod.aspx" class="current">代码处理规则</a></div>   
   </div>
 
         <div class="container-fluid">
@@ -39,8 +43,10 @@
         </div>
 
 </div>
-
-    <%= GetTemplate("_loader") %>
+<script src="../res/jquery.min.js"></script> 
+<script src="../res/wlniao.js"></script> 
+<script src="../res/artDialog/jquery.artDialog.js?skin=twitter" type="text/javascript"></script>
+<script src="../res/artDialog/plugins/iframeTools.js" type="text/javascript"></script>
 <script src="../res/miniui/miniui.js" type="text/javascript"></script>
 <script type="text/javascript">
     mini.parse();

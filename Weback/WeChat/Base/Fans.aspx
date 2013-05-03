@@ -2,7 +2,11 @@
 <html lang="zh">
 <head>
     <title>订阅者列表-<%=UIConfig("AppName")%></title>
-    <%= GetTemplate("_meta") %>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="../res/bootstrap.min.css" />
+    <link rel="stylesheet" href="../res/wlniao-style.css" />
+    <link rel="stylesheet" href="../res/wlniao-media.css" />
+    <link rel="stylesheet" href="../res/font-awesome/css/font-awesome.css" />
     <link href="../res/miniui/themes/default/miniui.css" rel="stylesheet" type="text/css" />
     <style type="text/css">
         .aedit{width:80px; display:inline-block;color:gray; cursor:pointer; background-image:url("../res/img/icon-edit.png"); background-repeat:no-repeat; background-position:100px 5px;}
@@ -13,7 +17,7 @@
 
 <div id="content" style=" margin:0px;">
   <div id="content-header">
-    <div id="breadcrumb"> <a href="/main.aspx" title="返回首页" class="tip-bottom"><i class="icon-home"></i>未来鸟微信平台</a> <a href="/base/fans.aspx" class="current">订阅者列表</a></div>   
+    <div id="breadcrumb"> <a href="../main.aspx" title="返回首页" class="tip-bottom"><i class="icon-home"></i>未来鸟微信平台</a> <a href="../base/fans.aspx" class="current">订阅者列表</a></div>   
   </div>
         <div class="container-fluid">
             <div class="row-fluid">
@@ -46,8 +50,11 @@
 
 </div>
 
-    <%= GetTemplate("_loader") %>
-    <script src="../res/miniui/miniui.js" type="text/javascript"></script>
+<script src="../res/jquery.min.js"></script> 
+<script src="../res/wlniao.js"></script> 
+<script src="../res/artDialog/jquery.artDialog.js?skin=twitter" type="text/javascript"></script>
+<script src="../res/artDialog/plugins/iframeTools.js" type="text/javascript"></script>
+<script src="../res/miniui/miniui.js" type="text/javascript"></script>
 <script type="text/javascript">
     mini.parse();
     var grid = mini.get("datagrid");

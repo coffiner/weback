@@ -9,9 +9,10 @@ namespace WeChat
 {
     public partial class Main : LoginPage
     {
+        protected string _titleName = System.Data.KvTableUtil.GetString("WeChatName");
         protected void Page_Load(object sender, EventArgs e)
         {
-            Response.Redirect("/base/setting.aspx");
+            Response.Redirect("base/setting.aspx");
         }
     }
 }
