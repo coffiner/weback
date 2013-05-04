@@ -372,9 +372,7 @@
     <Content Include="xcenter\data\wechat\manager.xml" />
     <Content Include="xcenter\template\default\_footer.html" />
     <Content Include="xcenter\template\default\_header.html" />
-    <Content Include="xcenter\template\default\_loader.html" />
     <Content Include="xcenter\template\default\_menu.html" />
-    <Content Include="xcenter\template\default\_meta.html" />
     <Content Include="Main.aspx" />
     <Content Include="使用说明.txt" />
   </ItemGroup>

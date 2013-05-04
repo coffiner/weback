@@ -23,9 +23,10 @@ namespace Wlniao.WeChat
     public abstract class ActionBase
     {
         private String fromId = "";
-        private String toId = "";
-        private String msgText;
-        private String msgArgs;
+        private String cmd = "";
+        private String msgContent;
+        private String cmdContent;
+        private Boolean onSession;
         /// <summary>
         /// 消息来源ID
         /// </summary>
@@ -35,28 +36,38 @@ namespace Wlniao.WeChat
             set { fromId = value; }
         }
         /// <summary>
-        /// 发送者ID
+        /// 执行的命令符
         /// </summary>
-        public String ToId
+        public String Cmd
         {
-            get { return toId; }
-            set { toId = value; }
+            get { return cmd; }
+            set { cmd = value; }
         }
         /// <summary>
-        /// 消息内容
+        /// 整个消息内容
         /// </summary>
-        public String MsgText
+        public String MsgContent
         {
-            get { return msgText; }
-            set { msgText = value; }
+            get { return msgContent; }
+            set { msgContent = value; }
         }
         /// <summary>
-        /// 参数（已除去命令符）
+        /// 除去命令符后的操作内容
         /// </summary>
-        public String MsgArgs
+        public String CmdContent
         {
-            get { return msgArgs; }
-            set { msgArgs = value; }
+            get
+            {
+                try
+                {
+                    if (msgContent.StartsWith(cmd))
+                    {
+                        msgContent = msgContent.Substring(cmd.Length).Trim();
+                    }
+                }
+                catch { }
+                return msgContent;
+            }
         }
         /// <summary>
         /// 标记当前流程执行成功
@@ -91,7 +102,7 @@ namespace Wlniao.WeChat
                 try
                 {
                     cmdstr = fans.CallBackText.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)[0];
-                    cmd = BLL.Rules.GetRule(cmdstr, FromId);
+                    cmd = BLL.Rules.GetRuleByCode(cmdstr, FromId);
                 }
                 catch { }
                 try
@@ -113,8 +124,8 @@ namespace Wlniao.WeChat
                         catch { }
                         ActionBase action = (ActionBase)Activator.CreateInstance(type);
                         action.FromId = FromId;
-                        action.MsgText = fans.CallBackText;
-                        action.MsgArgs = fans.CallBackText;
+                        action.Cmd = cmdstr;
+                        action.MsgContent = fans.CallBackText;
                         return type.InvokeMember(methodname, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.InvokeMethod | System.Reflection.BindingFlags.IgnoreCase, null, action, new object[] { }).ToString();
                     }
                     else

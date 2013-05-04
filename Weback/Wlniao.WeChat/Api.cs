@@ -43,7 +43,7 @@ namespace Wlniao.WeChat
                 return _ApiUrl;
             }
         }
-        public string RunMethod(string method, String cmdForm, String toId, String msgText, String msgArgs)
+        public string RunMethod(string method, String cmdForm, String cmdText, String msgText)
         {
             String content = "";             //方法执行结果
             try
@@ -64,9 +64,8 @@ namespace Wlniao.WeChat
                 {
                     ActionBase action = (ActionBase)Activator.CreateInstance(type);
                     action.FromId = cmdForm.TrimStart().TrimEnd();
-                    action.ToId = toId;
-                    action.MsgText = msgText;
-                    action.MsgArgs = msgArgs;
+                    action.Cmd = cmdText.TrimStart().TrimEnd();
+                    action.MsgContent = msgText.TrimStart().TrimEnd();
                     content = type.InvokeMember(methodname, BindingFlags.Public | BindingFlags.Instance | BindingFlags.InvokeMethod | BindingFlags.IgnoreCase, null, action, new object[] { }).ToString();
                 }
                 catch{}
@@ -74,7 +73,7 @@ namespace Wlniao.WeChat
             catch { }
             return content;
         }
-        public string RunDefaultMethod(String cmdForm, String toId, String msgText)
+        public string RunDefaultMethod(String cmdForm, String msgText)
         {
             String content = "";
             Type type = null;
@@ -91,9 +90,8 @@ namespace Wlniao.WeChat
             {
                 ActionBase action = (ActionBase)Activator.CreateInstance(type);
                 action.FromId = cmdForm;
-                action.ToId = toId;
-                action.MsgText = msgText;
-                action.MsgArgs = msgText;
+                action.Cmd = "";
+                action.MsgContent = msgText;
                 content = type.InvokeMember("Default", BindingFlags.Public | BindingFlags.Instance | BindingFlags.InvokeMethod | BindingFlags.IgnoreCase, null, action, new object[] { }).ToString();
             }
             catch { }

@@ -47,18 +47,37 @@ namespace Wlniao.WeChat.BLL
             return fans;
         }
         /// <summary>
-        /// 设置会话
+        /// 开始新的会话
         /// </summary>
         /// <param name="openid"></param>
         /// <returns></returns>
-        public static Model.Fans SetSession(string openid, string GoOnCmd, string DoMethod, string MsgArgs, string CallBackText)
+        public static Model.Fans NewSession(string openid, string GoOnCmd, string DoMethod, string CmdContent, string CallBackText)
         {
             Model.Fans fans = GetBy("WeChatOpenId", openid);
             if (fans != null)
             {
                 fans.GoOnCmd = GoOnCmd;
                 fans.DoMethod = DoMethod;
-                fans.CmdContent = MsgArgs;
+                fans.CmdContent = CmdContent;
+                fans.CallBackText = CallBackText;
+                fans.LastCmdTime = DateTools.GetNow();
+                fans.update(new string[] { "GoOnCmd", "DoMethod", "CmdContent", "CallBackText", "LastCmdTime" });
+            }
+            return fans;
+        }
+        /// <summary>
+        /// 设置会话
+        /// </summary>
+        /// <param name="openid"></param>
+        /// <returns></returns>
+        public static Model.Fans SetSession(string openid, string GoOnCmd, string DoMethod, string CmdContent, string CallBackText)
+        {
+            Model.Fans fans = GetBy("WeChatOpenId", openid);
+            if (fans != null)
+            {
+                fans.GoOnCmd = GoOnCmd;
+                fans.DoMethod = DoMethod;
+                fans.CmdContent = CmdContent;
                 fans.CallBackText = CallBackText;
                 fans.LastCmdTime = DateTools.GetNow();
                 fans.update(new string[] { "GoOnCmd", "DoMethod", "CmdContent", "CallBackText", "LastCmdTime" });
@@ -69,24 +88,22 @@ namespace Wlniao.WeChat.BLL
         /// 设置会话参数
         /// </summary>
         /// <param name="openid"></param>
-        /// <param name="MsgArgs"></param>
         /// <returns></returns>
-        public static Model.Fans SetGoOnCmd(string openid, string MsgArgs)
+        public static Model.Fans SetCmdContent(string openid, string CmdContent)
         {
             Model.Fans fans = GetBy("WeChatOpenId", openid);
-            if (fans != null&&!string.IsNullOrEmpty(MsgArgs))
+            if (fans != null)
             {
-                fans.GoOnCmd += Rules.Separation[0] + MsgArgs;
+                fans.CmdContent = CmdContent;
                 fans.LastCmdTime = DateTools.GetNow();
-                fans.update(new string[] { "GoOnCmd", "LastCmdTime" });
+                fans.update(new string[] { "CmdContent", "LastCmdTime" });
             }
             return fans;
         }
         /// <summary>
         /// 设置昵称
         /// </summary>
-        /// <param name="openid">用户Id</param>
-        /// <param name="nickname">昵称</param>
+        /// <param name="openid"></param>
         /// <returns></returns>
         public static Model.Fans SetNickName(string openid,string nickname)
         {
@@ -94,6 +111,7 @@ namespace Wlniao.WeChat.BLL
             if (fans != null)
             {
                 fans.NickName = nickname;
+                fans.LastCmdTime = DateTools.GetNow();
                 fans.update(new string[] { "NickName"});
             }
             return fans;

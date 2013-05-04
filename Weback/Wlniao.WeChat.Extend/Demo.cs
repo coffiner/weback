@@ -8,7 +8,7 @@ namespace Wlniao.WeChat.Extend
     {
         public string Chs2Pinyin()
         {
-            string msg = strUtil.Chs2Pinyin(MsgArgs);    //将用户输入内容转换成拼音
+            string msg = strUtil.Chs2Pinyin(CmdContent);    //将用户输入内容转换成拼音
             return FlagSuccess(msg);                      
         }
     }

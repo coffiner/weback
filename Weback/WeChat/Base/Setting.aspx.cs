@@ -19,9 +19,8 @@ namespace WeChat.Base
                         helper.Add("WeChatName", System.Data.KvTableUtil.GetString("WeChatName"));
                         helper.Add("AccountName", System.Data.KvTableUtil.GetString("AccountName"));
                         helper.Add("WeChatToken", System.Data.KvTableUtil.GetString("WeChatToken"));
-                        helper.Add("NoMessage", System.Data.KvTableUtil.GetString("NoMessage"));
-                        helper.Add("SessionTimeOut", System.Data.KvTableUtil.GetString("SessionTimeOut"));
-                        helper.Add("UploadExt", System.Data.KvTableUtil.GetString("UploadExt"));
+                        helper.Add("Subscribe", System.Data.KvTableUtil.GetString("Subscribe").Replace("\n", "<br/>"));
+                        helper.Add("NoMessage", System.Data.KvTableUtil.GetString("NoMessage").Replace("\n", "<br/>"));
                         helper.Add("Intro", System.Data.KvTableUtil.GetString("Intro").Replace("\n", "<br/>"));
                         helper.Response();
                         break;
@@ -32,10 +31,8 @@ namespace WeChat.Base
                         System.Data.KvTableUtil.Save("WeChatName", helper.GetParam("WeChatName"));
                         System.Data.KvTableUtil.Save("AccountName", helper.GetParam("AccountName"));
                         System.Data.KvTableUtil.Save("WeChatToken", helper.GetParam("WeChatToken"));
+                        System.Data.KvTableUtil.Save("Subscribe", helper.GetParam("Subscribe"));
                         System.Data.KvTableUtil.Save("NoMessage", helper.GetParam("NoMessage"));
-                        Wlniao.WeChat.BLL.Rules.SessionTimeOut = -1;
-                        System.Data.KvTableUtil.Save("SessionTimeOut", helper.GetParam("SessionTimeOut"));
-                        System.Data.KvTableUtil.Save("UploadExt", helper.GetParam("UploadExt"));
                         System.Data.KvTableUtil.Save("Intro", helper.GetParam("Intro"));
                         helper.ResponseResult();
                         break;

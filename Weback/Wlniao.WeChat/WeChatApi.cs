@@ -34,6 +34,7 @@ namespace Wlniao.WeChat
             Response.Clear();
             if (string.IsNullOrEmpty(Request.QueryString["echostr"]))
             {
+                bool fromPost = true;
                 string toUser = Request.QueryString["toUser"];
                 string fromUser = Request.QueryString["fromUser"];
                 string MsgType = Request.QueryString["MsgType"];
@@ -45,6 +46,7 @@ namespace Wlniao.WeChat
                     //声明一个XMLDoc文档对象，LOAD（）xml字符串
                     if (string.IsNullOrEmpty(Content))
                     {
+                        fromPost = false;
                         XmlDocument doc = new XmlDocument();
                         doc.LoadXml(new StreamReader(Request.InputStream).ReadToEnd());
                         toUser = doc.GetElementsByTagName("ToUserName")[0].InnerText;
@@ -76,27 +78,24 @@ namespace Wlniao.WeChat
                     {
                         case "event":
                         case "text":
-                            Wlniao.WeChat.Model.Rules rule = null;
-                            string msgArgs = "";
+                            string cmdstr = "";
+                            Wlniao.WeChat.Model.Rules cmd = null;
                             try
                             {
-                                rule = Wlniao.WeChat.BLL.Rules.GetRule(Content, fromUser);
+                                cmdstr = Content.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)[0];
+                                cmd = Wlniao.WeChat.BLL.Rules.GetRuleByCode(cmdstr, fromUser);
                             }
                             catch { }
-                            if (rule != null)
+                            if (cmd != null)
                             {
-                                if (Content.StartsWith(rule.GoOnCmd))
+                                Wlniao.WeChat.BLL.Fans.NewSession(fromUser, cmdstr, cmd.DoMethod, cmdstr, cmd.CallBackText);
+                                if (!string.IsNullOrEmpty(cmd.DoMethod))
                                 {
-                                    msgArgs = Content.Substring(rule.GoOnCmd.Length).Trim();
+                                    cmd.ReContent = RunMethod(cmd.DoMethod, fromUser, cmdstr, Content);
                                 }
-                                Wlniao.WeChat.BLL.Fans.SetSession(fromUser, rule.GoOnCmd, rule.DoMethod, msgArgs, rule.CallBackText);
-                                if (!string.IsNullOrEmpty(rule.DoMethod))
+                                else if (string.IsNullOrEmpty(cmd.ReContent))
                                 {
-                                    rule.ReContent = RunMethod(rule.DoMethod, fromUser, toUser, Content, msgArgs);
-                                }
-                                else if (string.IsNullOrEmpty(rule.ReContent))
-                                {
-                                    string where = "RuleGuid='" + rule.Guid + "'";
+                                    string where = "RuleGuid='" + cmd.Guid + "'";
                                     if (fans.AllowTest == 1)
                                     {
                                         where += " and (ContentStatus='normal' or ContentStatus='test')";
@@ -110,20 +109,20 @@ namespace Wlniao.WeChat
                                     List<Wlniao.WeChat.Model.RuleContent> listText = Wlniao.WeChat.Model.RuleContent.find(where + " and ContentType='text' order by LastStick desc").list();
                                     List<Wlniao.WeChat.Model.RuleContent> listPicText = Wlniao.WeChat.Model.RuleContent.find(where + " and ContentType='pictext' order by LastStick desc").list();
                                     List<Wlniao.WeChat.Model.RuleContent> listMusic = Wlniao.WeChat.Model.RuleContent.find(where + " and ContentType='music' order by LastStick desc").list();
-                                    if (rule.SendMode == "sendgroup" && listPicText != null && listPicText.Count > 0)
+                                    if (cmd.SendMode == "sendgroup" && listPicText != null && listPicText.Count > 0)
                                     {
-                                        rule.ReContent = ResponsePicTextMsg(fromUser, toUser, listPicText);
+                                        cmd.ReContent = ResponsePicTextMsg(fromUser, toUser, listPicText);
                                     }
                                     else if (listAll.Count > 0)
                                     {
                                         int i = 0;
-                                        if (rule.SendMode == "sendrandom")
+                                        if (cmd.SendMode == "sendrandom")
                                         {
                                             i = new Random().Next(0, listAll.Count);
                                         }
                                         if (listAll[i].ContentType == "text")
                                         {
-                                            rule.ReContent = listAll[i].TextContent;
+                                            cmd.ReContent = listAll[i].TextContent;
                                             try
                                             {
                                                 //更新推送次数
@@ -134,7 +133,7 @@ namespace Wlniao.WeChat
                                         }
                                         else if (listAll[i].ContentType == "music")
                                         {
-                                            rule.ReContent = ResponseMusicMsg(fromUser, toUser, listAll[i].Title, listAll[i].TextContent, listAll[i].MusicUrl, listAll[i].MusicUrl);
+                                            cmd.ReContent = ResponseMusicMsg(fromUser, toUser, listAll[i].Title, listAll[i].TextContent, listAll[i].MusicUrl, listAll[i].MusicUrl);
                                             try
                                             {
                                                 //更新推送次数
@@ -147,24 +146,35 @@ namespace Wlniao.WeChat
                                         {
                                             List<Wlniao.WeChat.Model.RuleContent> listTemp = new List<Model.RuleContent>();
                                             listTemp.Add(listAll[i]);
-                                            rule.ReContent = ResponsePicTextMsg(fromUser, toUser, listTemp);
+                                            cmd.ReContent = ResponsePicTextMsg(fromUser, toUser, listTemp);
                                         }
                                     }
                                 }
-                                Response.Write(ResponseTextMsg(fromUser, toUser, rule.ReContent));
+                                Response.Write(ResponseTextMsg(fromUser, toUser, cmd.ReContent));
                             }
                             else
                             {
-                                if (string.IsNullOrEmpty(fans.DoMethod) || fans.LastCmdTime < DateTools.GetNow().AddSeconds(0-BLL.Rules.SessionTimeOut))
+                                if (string.IsNullOrEmpty(fans.DoMethod) || fans.LastCmdTime < DateTools.GetNow().AddMinutes(-3))
                                 {
-                                    Response.Write(ResponseTextMsg(fromUser, toUser, RunDefaultMethod(fromUser, toUser, Content)));
+                                    Response.Write(ResponseTextMsg(fromUser, toUser, RunDefaultMethod(fromUser, Content)));
                                 }
                                 else
                                 {
-                                    Response.Write(ResponseTextMsg(fromUser, toUser, RunMethod(fans.DoMethod, fromUser, toUser, (fans.GoOnCmd + BLL.Rules.Separation[0] + Content).Trim(), Content)));
+                                    Response.Write(ResponseTextMsg(fromUser, toUser, RunMethod(fans.DoMethod, fromUser, fans.GoOnCmd, fans.CmdContent.TrimEnd() + " " + Content)));
                                 }
                             }
                             break;
+                        //case "event":
+                        //    cmd = Wlniao.WeChat.BLL.Rules.GetRuleByCode(Event);
+                        //    if (cmd != null)
+                        //    {
+                        //        if (!string.IsNullOrEmpty(cmd.DoMethod))
+                        //        {
+                        //            cmd.ReContent = RunMethod(cmd.DoMethod, fromUser, Event, Content);
+                        //        }
+                        //        Response.Write(ResponseTextMsg(fromUser, toUser, cmd.ReContent));
+                        //    }
+                        //    break;
                         default:
                             break;
                     }
@@ -285,7 +295,7 @@ namespace Wlniao.WeChat
                     {
                         urlTemp = string.IsNullOrEmpty(article.ThumbPicUrl) ? article.PicUrl : article.ThumbPicUrl;
                     }
-                    sbTemp.AppendFormat("   <PicUrl><![CDATA[{0}]]></PicUrl>",( !string.IsNullOrEmpty(urlTemp)&& urlTemp.Contains("http://")) ? urlTemp : ApiUrl + urlTemp);
+                    sbTemp.AppendFormat("   <PicUrl><![CDATA[{0}]]></PicUrl>", urlTemp.Contains("http://") ? urlTemp : ApiUrl + urlTemp);
                     sbTemp.AppendFormat("   <Url><![CDATA[{0}]]></Url>", article.LinkUrl);
                     sbTemp.AppendFormat("   <FuncFlag>0</FuncFlag>");
                     sbTemp.AppendFormat("</item>");
@@ -338,8 +348,8 @@ namespace Wlniao.WeChat
             sb.AppendFormat("<Music>");
             sb.AppendFormat("   <Title><![CDATA[{0}]]></Title>", title);
             sb.AppendFormat("   <Description><![CDATA[{0}]]></Description>", description);
-            sb.AppendFormat("   <MusicUrl><![CDATA[{0}]]></MusicUrl>",( !string.IsNullOrEmpty(musicurl)&& musicurl.Contains("http://")) ? musicurl : ApiUrl + musicurl);
-            sb.AppendFormat("   <HQMusicUrl><![CDATA[{0}]]></HQMusicUrl>",( !string.IsNullOrEmpty(hqmusicurl)&& hqmusicurl.Contains("http://")) ? hqmusicurl : ApiUrl + hqmusicurl);
+            sb.AppendFormat("   <MusicUrl><![CDATA[{0}]]></MusicUrl>", musicurl.Contains("http://") ? musicurl : ApiUrl + musicurl);
+            sb.AppendFormat("   <HQMusicUrl><![CDATA[{0}]]></HQMusicUrl>", hqmusicurl.Contains("http://") ? hqmusicurl : ApiUrl + hqmusicurl);
             sb.AppendFormat("   <FuncFlag>0</FuncFlag>");
             sb.AppendFormat("</Music>");
             sb.AppendFormat("</xml>");
