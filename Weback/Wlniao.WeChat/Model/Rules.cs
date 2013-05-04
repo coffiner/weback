@@ -92,6 +92,16 @@ namespace Wlniao.WeChat.Model
             get { return _SendMode; }
             set { _SendMode = value; }
         }
+        private string _GoOnCmd;
+        /// <summary>
+        /// 命令符
+        /// </summary>
+        [NotSave]
+        public string GoOnCmd
+        {
+            get { return _GoOnCmd; }
+            set { _GoOnCmd = value; }
+        }
 
     }
     /// <summary>

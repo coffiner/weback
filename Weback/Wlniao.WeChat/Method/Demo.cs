@@ -16,40 +16,44 @@ using System.Text;
 
 namespace Wlniao.WeChat.Method
 {
-    public class Demo:Wlniao
+    public class Demo : Wlniao
     {
 
         #region 演示方法
         public string Hello()
         {
-            string[] contents = CmdContent.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-            if (contents.Length < 2 || string.IsNullOrEmpty(contents[0]))
+            string[] contents = MsgText.Split(BLL.Rules.Separation, StringSplitOptions.RemoveEmptyEntries);
+            if (contents.Length <= 3 || string.IsNullOrEmpty(MsgArgs))
             {
-                if (string.IsNullOrEmpty(contents[0]))
+                if (string.IsNullOrEmpty(MsgArgs))
                 {
                     return @"您好！
 请告诉我您的名字";
-                    BLL.Fans.SetCmdContent(FromId, "");
+                    BLL.Fans.SetGoOnCmd(FromId, "");
                 }
-                else if (contents.Length < 2)
+                else if (contents.Length == 2)
                 {
-                    BLL.Fans.SetCmdContent(FromId, contents[0]);
-                    return contents[0] + @"您好！
+                    BLL.Fans.SetGoOnCmd(FromId, MsgArgs);
+                    return MsgArgs + @"您好！
 请告诉我您的性别，“男”或“女”";
                 }
+                else if (contents.Length == 3)
+                {
+                    if (MsgArgs == "男" || MsgArgs == "女")
+                    {
+                        return FlagSuccess(contents[1] + (string.IsNullOrEmpty(contents[2]) ? "未知" : (contents[2] == "男" ? "先生" : "女士")) + ",你好！");
+                    }
+                    else
+                    {
+                        return "性别输入错误，请输入“男”或“女”";
+                    }
+                }
             }
-            if (contents[1] == "男" || contents[1] == "女")
-            {
-                return FlagSuccess(contents[0] + (string.IsNullOrEmpty(contents[1]) ? "未知" : (contents[1] == "男" ? "先生" : "女士")) + ",你好！");
-            }
-            else
-            {
-                return "性别输入错误，请输入“男”或“女”";
-            }
+            return "";
         }
         public string HelloWorld()
         {
-            return FlagSuccess("您对我说了：" + CmdContent);
+            return FlagSuccess("您对我说了：" + MsgArgs);
         }
         #endregion
     }

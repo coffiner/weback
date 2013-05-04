@@ -18,7 +18,36 @@ namespace WeChat.Base
                     case "del":
                         try
                         {
-                            helper.Result =Wlniao.WeChat.BLL.Rules.DelRules(helper.GetParam("Guid"));
+                            helper.Result = Wlniao.WeChat.BLL.Rules.DelRules(helper.GetParam("Guid"));
+                        }
+                        catch (Exception ex)
+                        {
+                            helper.Result.Add("错误：" + ex.Message);
+                        }
+                        helper.ResponseResult();
+                        break;
+                    case "convertmethod":
+                        try
+                        {
+                            Wlniao.WeChat.Model.Rules rule = Wlniao.WeChat.BLL.Rules.Get(helper.GetParam("Guid"));
+                            if (string.IsNullOrEmpty(rule.DoMethod))
+                            {
+                                rule.DoMethod = "Wlniao.Empty";
+                            }
+                            rule.update("DoMethod");
+                        }
+                        catch (Exception ex)
+                        {
+                            helper.Result.Add("错误：" + ex.Message);
+                        }
+                        helper.ResponseResult();
+                        break;
+                    case "convertauto":
+                        try
+                        {
+                            Wlniao.WeChat.Model.Rules rule = Wlniao.WeChat.BLL.Rules.Get(helper.GetParam("Guid"));
+                            rule.DoMethod = "";
+                            rule.update("DoMethod");
                         }
                         catch (Exception ex)
                         {

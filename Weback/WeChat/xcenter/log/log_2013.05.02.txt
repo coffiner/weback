@@ -1,0 +1,76 @@
+﻿2013-4-25 23:05:01 info System.Data.DbConfig - checkConnectionString... 
+2013-4-25 23:05:01 info System.Data.DbConfig - connectionString:Provider=Microsoft.Jet.OLEDB.4.0;Data Source=D:\未来鸟产品\WlniaoWeChat\Weback\WeChat\WeChat.mdb 
+2013-4-25 23:05:01 info System.Data.DbConfig - database path original:d:\未来鸟产品\wlniaowechat\weback\wechat\wechat.mdb 
+2013-4-25 23:05:01 info System.ORM.MappingClass - begin MappingClass ... 
+2013-4-25 23:05:01 info System.ORM.MappingClass - loadByReflection 
+2013-4-25 23:05:01 info System.ORM.MappingClass - Loading Type : Wlniao.WeChat.ActionBase 
+2013-4-25 23:05:01 info System.ORM.MappingClass - Loading Type : Wlniao.WeChat.BLL.Fans 
+2013-4-25 23:05:01 info System.ORM.MappingClass - Loading Type : Wlniao.WeChat.Method.Wlniao 
+2013-4-25 23:05:01 info System.ORM.MappingClass - Loading Type : Wlniao.WeChat.Api 
+2013-4-25 23:05:01 info System.ORM.MappingClass - Loading Type : Wlniao.WeChat.WeChatApi 
+2013-4-25 23:05:01 info System.ORM.MappingClass - Loading Type : Wlniao.WeChat.Model.Rules 
+2013-4-25 23:05:01 info System.ORM.MappingClass - Loading Type : Wlniao.WeChat.Model.RuleCode 
+2013-4-25 23:05:01 info System.ORM.MappingClass - Loading Type : Wlniao.WeChat.Model.RuleContent 
+2013-4-25 23:05:01 info System.ORM.MappingClass - Loading Type : Wlniao.WeChat.BLL.Rules 
+2013-4-25 23:05:01 info System.ORM.MappingClass - Loading Type : Wlniao.WeChat.Method.Demo 
+2013-4-25 23:05:01 info System.ORM.MappingClass - Loading Type : Wlniao.WeChat.Model.Fans 
+2013-4-25 23:05:01 info System.ORM.MappingClass - Loading Type : Wlniao.WeChat.BLL.Sys 
+2013-4-25 23:05:01 info System.ORM.MappingClass - loaded assembly: Wlniao.WeChat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null 
+2013-4-25 23:05:01 info System.ORM.MappingClass - FinishPropertyInfo 
+2013-4-25 23:05:01 info System.ORM.MappingClass - cacheInterceptor 
+2013-4-25 23:05:01 info System.ORM.MappingClass - AccessorUtil.Init 
+2013-4-25 23:05:01 info BofRjjLoaE3heODqL9GCU.AjeVmxello6hetmO - cacheFactory... 
+2013-4-25 23:05:01 info BFdIFxS2.AkXbM71NiOL - XCore, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null__C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\Temporary ASP.NET Files\root\c5d74faa\506f98b0\assembly\dl3\4da3f554\aa864111_ec3dce01\XCore.DLL 
+2013-4-25 23:05:01 info BFdIFxS2.AkXbM71NiOL - mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089__C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\mscorlib.dll 
+2013-4-25 23:05:01 info BFdIFxS2.AkXbM71NiOL - System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a__C:\WINDOWS\assembly\GAC_32\System.Web\2.0.0.0__b03f5f7f11d50a3a\System.Web.dll 
+2013-4-25 23:05:01 info BFdIFxS2.AkXbM71NiOL - System.Data, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089__C:\WINDOWS\assembly\GAC_32\System.Data\2.0.0.0__b77a5c561934e089\System.Data.dll 
+2013-4-25 23:05:01 info BFdIFxS2.AkXbM71NiOL - System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089__C:\WINDOWS\assembly\GAC_MSIL\System\2.0.0.0__b77a5c561934e089\System.dll 
+2013-4-25 23:05:01 info BFdIFxS2.AkXbM71NiOL - System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a__C:\WINDOWS\assembly\GAC_MSIL\System.Drawing\2.0.0.0__b03f5f7f11d50a3a\System.Drawing.dll 
+2013-4-25 23:05:01 info BFdIFxS2.AkXbM71NiOL - System.Xml, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089__C:\WINDOWS\assembly\GAC_MSIL\System.Xml\2.0.0.0__b77a5c561934e089\System.Xml.dll 
+2013-4-25 23:05:01 info BFdIFxS2.AkXbM71NiOL - System.Data.OracleClient, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089__C:\WINDOWS\assembly\GAC_32\System.Data.OracleClient\2.0.0.0__b77a5c561934e089\System.Data.OracleClient.dll 
+2013-4-25 23:05:01 info BFdIFxS2.AkXbM71NiOL - System.Configuration, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a__C:\WINDOWS\assembly\GAC_MSIL\System.Configuration\2.0.0.0__b03f5f7f11d50a3a\System.Configuration.dll 
+2013-4-25 23:05:01 info BFdIFxS2.AkXbM71NiOL - System.Management, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a__C:\WINDOWS\assembly\GAC_MSIL\System.Management\2.0.0.0__b03f5f7f11d50a3a\System.Management.dll 
+2013-4-25 23:05:01 info BFdIFxS2.AkXbM71NiOL - System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089__C:\WINDOWS\assembly\GAC_MSIL\System.Windows.Forms\2.0.0.0__b77a5c561934e089\System.Windows.Forms.dll 
+2013-4-25 23:05:01 info BFdIFxS2.AkXbM71NiOL - Wlniao.WeChat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null__C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\Temporary ASP.NET Files\root\c5d74faa\506f98b0\assembly\dl3\ecaaffec\86b01b17_c641ce01\Wlniao.WeChat.DLL 
+2013-4-25 23:05:02 info BofRjjLoaE3heODqL9GCU.AjeVmxello6hetmO - cacheAccessor... 
+2013-4-25 23:05:02 info System.ORM.MappingClass - begin check database... 
+2013-4-25 23:05:02 info System.ORM.MappingClass - CheckDatabase 
+2013-4-25 23:05:02 info BbMDZRCsh8r4CAweaUdY5VRi.ABgrgEg8d3tOlx((E8c4) - begin check database 
+2013-4-25 23:05:02 info System.ORM.MappingClass - CheckTable 
+2013-4-25 23:05:02 info BbMDZRCsh8r4CAweaUdY5VRi.ABgrgEg8d3tOlx((E8c4) - [access] begin check table 
+2013-4-25 23:05:06 info BbMDZRCsh8r4CAweaUdY5VRi.ABgrgEg8d3tOlx((E8c4) - table found：Fans 
+2013-4-25 23:05:06 info BbMDZRCsh8r4CAweaUdY5VRi.ABgrgEg8d3tOlx((E8c4) - table found：RuleCode 
+2013-4-25 23:05:06 info BbMDZRCsh8r4CAweaUdY5VRi.ABgrgEg8d3tOlx((E8c4) - table found：RuleContent 
+2013-4-25 23:05:06 info BbMDZRCsh8r4CAweaUdY5VRi.ABgrgEg8d3tOlx((E8c4) - table found：Rules 
+2013-4-25 23:05:06 info Iu)YsYkqvXYqv)0qugp0v4RGnSr(O.ALZ9kB7(C1ZLiugd - table map : Wlniao.WeChat.Model.Fans => Fans 
+2013-4-25 23:05:06 info Iu)YsYkqvXYqv)0qugp0v4RGnSr(O.ALZ9kB7(C1ZLiugd - table map : Wlniao.WeChat.Model.RuleContent => RuleContent 
+2013-4-25 23:05:06 info Iu)YsYkqvXYqv)0qugp0v4RGnSr(O.ALZ9kB7(C1ZLiugd - table map : Wlniao.WeChat.Model.Rules => Rules 
+2013-4-25 23:05:06 info Iu)YsYkqvXYqv)0qugp0v4RGnSr(O.ALZ9kB7(C1ZLiugd - table map : Wlniao.WeChat.Model.RuleCode => RuleCode 
+2013-4-25 23:05:06 info System.ORM.MappingClass - GetTables 
+2013-4-25 23:05:06 info System.ORM.MappingClass - end check database... 
+2013-4-25 23:05:06 info System.ORM.MappingClass - end MappingClass ... 
+2013-4-25 23:05:06 info BsPZjEQ(75Uet12I4mO5.A4dSGi4BR9LP9 - [Count(String condition) Sql]:select count(*) from Fans where Subscribe=1 and IsNewFans=1 
+2013-4-25 23:05:06 debug HsPOet0L.AW(4qsUZ5cS - ctx_cache_+=>__objectCount_Wlniao.WeChat.Model.Fans_Subscribe=1 and IsNewFans=1 
+2013-4-25 23:05:11 info FXv2SBVxScNpoXBiTOxO.AcgDLcvWErZVQ4K)mPlP9 - [Page Record Count] select count(*) from Fans where Subscribe=1 
+2013-4-25 23:05:11 info J6Gtj1q2No(SXOY7kgXip.Af0qSnJ)MMhMvM8 - [Page Sql] select top 18 * from fans where subscribe=1 order by id desc 
+2013-4-25 23:05:11 info FXv2SBVxScNpoXBiTOxO.AcgDLcvWErZVQ4K)mPlP9 - [Page Record Count] select count(*) from Fans where IsNewFans=1 
+2013-4-25 23:05:11 info J6Gtj1q2No(SXOY7kgXip.Af0qSnJ)MMhMvM8 - [Page Sql] select top 2147483647 * from fans where isnewfans=1 order by id desc 
+2013-4-25 23:05:11 info AF(h3s7YNnbJwokL.AdpRRqqOeVV8vni - Fans[Fans] Update Sql：update Fans set IsNewFans=? where Id=? 
+2013-4-25 23:05:12 debug System.ORM.Caching.CacheTime - updateTable at=>2013-4-25 23:05:12_Wlniao.WeChat.Model.Fans 
+2013-4-25 23:05:12 debug HsPOet0L.AW(4qsUZ5cS - ctx_cache_+=>__object_Wlniao.WeChat.Model.Fans_2 
+2013-4-25 23:05:12 info AF(h3s7YNnbJwokL.AdpRRqqOeVV8vni - Fans[Fans] Update Sql：update Fans set IsNewFans=? where Id=? 
+2013-4-25 23:05:12 debug System.ORM.Caching.CacheTime - updateTable at=>2013-4-25 23:05:12_Wlniao.WeChat.Model.Fans 
+2013-4-25 23:05:12 debug HsPOet0L.AW(4qsUZ5cS - ctx_cache_+=>__object_Wlniao.WeChat.Model.Fans_1 
+2013-4-25 23:05:17 info FXv2SBVxScNpoXBiTOxO.AcgDLcvWErZVQ4K)mPlP9 - [Page Record Count] select count(*) from Rules where DoMethod<>'' 
+2013-4-25 23:05:17 info J6Gtj1q2No(SXOY7kgXip.Af0qSnJ)MMhMvM8 - [Page Sql] select top 18 * from rules where domethod<>'' order by id desc 
+2013-4-25 23:05:20 info FXv2SBVxScNpoXBiTOxO.AcgDLcvWErZVQ4K)mPlP9 - [Page Record Count] select count(*) from Rules where DoMethod='' 
+2013-4-25 23:05:20 info J6Gtj1q2No(SXOY7kgXip.Af0qSnJ)MMhMvM8 - [Page Sql] select top 18 * from rules where domethod='' order by id desc 
+2013-4-25 23:05:22 info System.ORM.Query - [FindBy]select top 1 * from rules where (strguid='2e363b0d-7b2d-4c7f-9a3d-62f6e624f064') order by id desc 
+2013-4-25 23:05:22 debug HsPOet0L.AW(4qsUZ5cS - ctx_cache_+=>__objectQueryList_Wlniao.WeChat.Model.Rules_select top 1 * from rules where (strguid='2e363b0d-7b2d-4c7f-9a3d-62f6e624f064') order by id desc paramValue : 
+2013-4-25 23:05:22 debug System.ORM.Caching.CacheTime - updateList at=>2013-4-25 23:05:22___objectQueryList_Wlniao.WeChat.Model.Rules_select top 1 * from rules where (strguid='2e363b0d-7b2d-4c7f-9a3d-62f6e624f064') order by id desc paramValue : 
+2013-4-25 23:05:22 info FXv2SBVxScNpoXBiTOxO.AcgDLcvWErZVQ4K)mPlP9 - [Page Record Count] select count(*) from RuleContent where RuleGuid='2e363b0d-7b2d-4c7f-9a3d-62f6e624f064'  
+2013-4-25 23:05:22 info J6Gtj1q2No(SXOY7kgXip.Af0qSnJ)MMhMvM8 - [Page Sql] select top 300 * from rulecontent where ruleguid='2e363b0d-7b2d-4c7f-9a3d-62f6e624f064' order by laststick desc 
+2013-4-25 23:05:22 info FXv2SBVxScNpoXBiTOxO.AcgDLcvWErZVQ4K)mPlP9 - [Page Record Count] select count(*) from RuleCode where RuleGuid='2e363b0d-7b2d-4c7f-9a3d-62f6e624f064' 
+2013-4-25 23:05:22 info J6Gtj1q2No(SXOY7kgXip.Af0qSnJ)MMhMvM8 - [Page Sql] select top 300 * from rulecode where ruleguid='2e363b0d-7b2d-4c7f-9a3d-62f6e624f064' order by id desc 
+2013-4-25 23:07:04 info FXv2SBVxScNpoXBiTOxO.AcgDLcvWErZVQ4K)mPlP9 - [Page Record Count] select count(*) from Rules where DoMethod<>'' 
+2013-4-25 23:07:04 info J6Gtj1q2No(SXOY7kgXip.Af0qSnJ)MMhMvM8 - [Page Sql] select top 18 * from rules where domethod<>'' order by id desc 
