@@ -1,15 +1,15 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="WeChat.Default" %><!DOCTYPE html>
 <html lang="zh">
 <head>
-    <title><%=_titleName%>|微信公众帐号管理系统 - <%=UIConfig("AppName")%></title>
+    <title><%=_titleName%>|微信公众帐号管理系统 - Weback</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="res/bootstrap.min.css" />
     <link rel="stylesheet" href="res/wlniao-style.css" />
     <link rel="stylesheet" href="res/wlniao-media.css" />
     <link rel="stylesheet" href="res/font-awesome/css/font-awesome.css" />
 </head>
-<body>
-<div id="header"><h1><a href="#" class="tip-bottom" title="{UI.AppName}">{UI.AppName}</a></h1></div>
+<body style=" overflow:hidden;">
+<div id="header"><h1><a href="#" class="tip-bottom" title="Weback">Weback</a></h1></div>
 <div id="user-nav" class="navbar navbar-inverse">
   <ul class="nav">
     <li class=""><a title="" href="javascript:GotoPage('base/setting.aspx');"><i class="icon icon-cog"></i> <span class="text">微信设置</span></a></li>
@@ -19,15 +19,31 @@
   </ul>
   <div style="clear:both;"></div>
 </div>
-<%= GetTemplate("_menu") %>
+<div id="sidebar">
+  <ul>
+    <li class="menuli"><a href="javascript:GotoPage('main.aspx');"><i class="icon icon-home"></i> <span>概况</span></a> </li>
+    <li class="menuli"><a href="javascript:GotoPage('base/rulesauto.aspx');"><i class="icon icon-th"></i> <span>自动回复规则</span></a></li>
+    <li class="menuli"><a href="javascript:GotoPage('base/rulesmethod.aspx');"><i class="icon icon-edit"></i> <span>代码处理规则</span></a></li>
+    <li class="menuli"><a href="javascript:GotoPage('base/mybutton.aspx');"><i class="icon icon-inbox"></i> <span>自定义菜单</span></a></li>
+    <li class="menuli"><a href="javascript:GotoPage('http://weback.wlniao.com');"><i class="icon icon-info-sign"></i> <span>关于程序</span></a></li>
+  </ul>
+</div>
 <div id="content" style="margin-top:-38px;"></div>
-<%= GetTemplate("_footer") %>
+<div class="row-fluid">
+  <div id="footer" class="span12"> 2013 &copy; <a href="http://weback.wlniao.com/" target="_blank">Weback</a> &nbsp;&nbsp; 技术支持：<a href="http://www.wlniao.com/" target="_blank">Wlniao Studio</a> </div>
+</div>
 <script src="res/jquery.min.js"></script>
 <script src="res/wlniao.js"></script>
 <script src="res/artDialog/jquery.artDialog.js?skin=twitter" type="text/javascript"></script>
 <script src="res/artDialog/plugins/iframeTools.js" type="text/javascript"></script>
-<script type="text/javascript" src="http://tajs.qq.com/stats?sId=23924686" charset="UTF-8"></script>
 <script type="text/javascript">
+    var iHeight = 0;
+    function init() {
+        var winHeight = $(window).height();
+        iHeight = winHeight - 70;
+        $("#content").height(iHeight);
+    }
+    init();
     var frameid = "iframepage";
     function setFrameHeight(height) {
         try {
@@ -50,20 +66,12 @@
     }
     function GotoPage(url) {
         var now = new Date();
-        var html = '<iframe id="' + frameid + '" src="' + url + '" frameborder="0" marginheight="0" marginwidth="0" scrolling="no" width="100%" height="300"></iframe> ';
+        var html = '<iframe id="' + frameid + '" src="' + url + '" frameborder="0" marginheight="0" marginwidth="0" scrolling="auto" width="100%" height="' + iHeight + '"></iframe> ';
         document.getElementById('content').innerHTML = html;
-        setTimeout(function () {
-            iFrameHeight();
-            setTimeout(function () {
-                iFrameHeight();
-                setTimeout(function () {
-                    iFrameHeight();
-                }, 2000);
-            }, 1000);
-        }, 300);
     }
     GotoPage('main.aspx');
 </script>
+<script type="text/javascript" src="http://tajs.qq.com/stats?sId=23924686" charset="UTF-8"></script>
 </body>
 </html>
 

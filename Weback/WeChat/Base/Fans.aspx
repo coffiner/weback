@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Fans.aspx.cs" Inherits="WeChat.Base.Fans" %><!DOCTYPE html>
 <html lang="zh">
 <head>
-    <title>订阅者列表-<%=UIConfig("AppName")%></title>
+    <title>订阅者列表-Weback</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="../res/bootstrap.min.css" />
     <link rel="stylesheet" href="../res/wlniao-style.css" />
@@ -28,7 +28,7 @@
                             <a class="btn btn-primary" href="javascript:Search();" style=" float:right;">筛选</a>
                             <input type="text" class="grd-white" id="SearchKey" onchange="Search();" />
                         </div>
-                        <h5>我的微信订阅者</h5>
+                        <h5>我的微信订阅者<span style=" font-weight:normal; color:#999999;">（点击测试功能一列可为用户开启/关闭测试权限）</span></h5>
                     </div>
                     <div class="mini-fit" style="clear:both;height:560px;">
                         <div id="datagrid" class="mini-datagrid" style="width:100%;height:100%" pageSize="18" showPageIndex="true" showLoading="false" showTotalCount="true" allowResize="false" url="fans.aspx?action=getlist" idField="Guid" multiSelect="true" >

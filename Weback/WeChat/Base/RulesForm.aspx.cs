@@ -179,7 +179,7 @@ namespace WeChat.Base
                     case "stickcontent":
                         try
                         {
-                            var stick = Wlniao.WeChat.Model.RuleContent.findByField("StrGuid", helper.GetParam("Guid"));
+							Wlniao.WeChat.Model.RuleContent stick = Wlniao.WeChat.Model.RuleContent.findByField("StrGuid", helper.GetParam("Guid"));
                             stick.LastStick = DateTools.GetNow();
                             stick.update("LastStick");
                         }

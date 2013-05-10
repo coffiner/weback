@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="WeChat.Login" %><!DOCTYPE html>
 <html lang="en">    
 <head>
-    <title><%=_titleName%>|微信公众帐号管理系统 - <%=UIConfig("AppName")%></title>
+    <title><%=_titleName%>|微信公众帐号管理系统 - Weback</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="res/bootstrap.min.css" />
     <link rel="stylesheet" href="res/font-awesome/css/font-awesome.css" />

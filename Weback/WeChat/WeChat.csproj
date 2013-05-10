@@ -7,7 +7,7 @@
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{01696A99-F2B2-4CBA-8241-9737B98D0932}</ProjectGuid>
-    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <ProjectTypeGuids>{349C5851-65DF-11DA-9384-00065B846F21};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>WeChat</RootNamespace>
@@ -55,6 +55,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="article.aspx" />
     <Content Include="Base\fulecodedemo.jpg" />
     <Content Include="Base\fulecontentdemo.jpg" />
     <Content Include="Base\Setting.aspx" />
@@ -63,8 +64,13 @@
     <Content Include="Base\RulesForm.aspx" />
     <Content Include="Base\RulesMethod.aspx" />
     <Content Include="Base\Account.aspx" />
+    <Content Include="Base\MyButton.aspx" />
     <Content Include="license.html" />
     <Content Include="res\bootstrap.min.css" />
+    <Content Include="res\bootstrap.min.js" />
+    <Content Include="res\css\page-style.css" />
+    <Content Include="res\img\blockquote-down.png" />
+    <Content Include="res\img\blockquote-up.png" />
     <Content Include="res\img\glyphicons-halflings-gray.png" />
     <Content Include="res\img\icon-edit.png" />
     <Content Include="res\jquery.jmp3.js" />
@@ -72,6 +78,59 @@
     <Content Include="res\miniui\swfupload\swfupload.swf" />
     <Content Include="res\miniui\swfupload\swfuploadbutton.swf" />
     <Content Include="res\singlemp3player.swf" />
+    <Content Include="res\ueditor\dialogs\image\image.css" />
+    <Content Include="res\ueditor\dialogs\image\image.html" />
+    <Content Include="res\ueditor\dialogs\image\image.js" />
+    <Content Include="res\ueditor\dialogs\image\images\center_focus.jpg" />
+    <Content Include="res\ueditor\dialogs\image\images\left_focus.jpg" />
+    <Content Include="res\ueditor\dialogs\image\images\none_focus.jpg" />
+    <Content Include="res\ueditor\dialogs\image\images\right_focus.jpg" />
+    <Content Include="res\ueditor\dialogs\image\imageUploader.swf" />
+    <Content Include="res\ueditor\dialogs\internal.js" />
+    <Content Include="res\ueditor\dialogs\link\link.html" />
+    <Content Include="res\ueditor\dialogs\tangram.js" />
+    <Content Include="res\ueditor\editor_all.js" />
+    <Content Include="res\ueditor\editor_all_min.js" />
+    <Content Include="res\ueditor\editor_config.js" />
+    <Content Include="res\ueditor\index.html" />
+    <Content Include="res\ueditor\lang\zh-cn\images\copy.png" />
+    <Content Include="res\ueditor\lang\zh-cn\images\imglabel.png" />
+    <Content Include="res\ueditor\lang\zh-cn\images\localimage.png" />
+    <Content Include="res\ueditor\lang\zh-cn\images\music.png" />
+    <Content Include="res\ueditor\lang\zh-cn\images\upload.png" />
+    <Content Include="res\ueditor\lang\zh-cn\zh-cn.js" />
+    <Content Include="res\ueditor\themes\default\css\ueditor.css" />
+    <Content Include="res\ueditor\themes\default\dialogbase.css" />
+    <Content Include="res\ueditor\themes\default\images\anchor.gif" />
+    <Content Include="res\ueditor\themes\default\images\arrow.png" />
+    <Content Include="res\ueditor\themes\default\images\button-bg.gif" />
+    <Content Include="res\ueditor\themes\default\images\cancelbutton.gif" />
+    <Content Include="res\ueditor\themes\default\images\cursor_h.gif" />
+    <Content Include="res\ueditor\themes\default\images\cursor_h.png" />
+    <Content Include="res\ueditor\themes\default\images\cursor_v.gif" />
+    <Content Include="res\ueditor\themes\default\images\cursor_v.png" />
+    <Content Include="res\ueditor\themes\default\images\dialog-title-bg.png" />
+    <Content Include="res\ueditor\themes\default\images\filescan.png" />
+    <Content Include="res\ueditor\themes\default\images\highlighted.gif" />
+    <Content Include="res\ueditor\themes\default\images\icons-all.gif" />
+    <Content Include="res\ueditor\themes\default\images\icons.gif" />
+    <Content Include="res\ueditor\themes\default\images\icons.png" />
+    <Content Include="res\ueditor\themes\default\images\lock.gif" />
+    <Content Include="res\ueditor\themes\default\images\neweditor-tab-bg.png" />
+    <Content Include="res\ueditor\themes\default\images\pagebreak.gif" />
+    <Content Include="res\ueditor\themes\default\images\scale.png" />
+    <Content Include="res\ueditor\themes\default\images\spacer.gif" />
+    <Content Include="res\ueditor\themes\default\images\sparator_v.png" />
+    <Content Include="res\ueditor\themes\default\images\toolbar_bg.png" />
+    <Content Include="res\ueditor\themes\default\images\unhighlighted.gif" />
+    <Content Include="res\ueditor\themes\default\images\upload.png" />
+    <Content Include="res\ueditor\themes\default\images\videologo.gif" />
+    <Content Include="res\ueditor\themes\default\images\word.gif" />
+    <Content Include="res\ueditor\themes\default\images\wordpaste.png" />
+    <Content Include="res\ueditor\themes\iframe.css" />
+    <Content Include="res\ueditor\third-party\codemirror\codemirror.css" />
+    <Content Include="res\ueditor\third-party\codemirror\codemirror.js" />
+    <Content Include="res\ueditor\uparse.js" />
     <Content Include="res\wlniao-media.css" />
     <Content Include="res\wlniao-style.css" />
     <Content Include="Default.aspx" />
@@ -368,15 +427,17 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="WeChatApi.aspx" />
-    <Content Include="xcenter\data\BaseData.xml" />
-    <Content Include="xcenter\data\wechat\manager.xml" />
-    <Content Include="xcenter\template\default\_footer.html" />
-    <Content Include="xcenter\template\default\_header.html" />
-    <Content Include="xcenter\template\default\_menu.html" />
     <Content Include="Main.aspx" />
     <Content Include="使用说明.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="article.aspx.cs">
+      <DependentUpon>article.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="article.aspx.designer.cs">
+      <DependentUpon>article.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Base\Setting.aspx.cs">
       <DependentUpon>Setting.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -419,6 +480,13 @@
     <Compile Include="Base\Account.aspx.designer.cs">
       <DependentUpon>Account.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Base\MyButton.aspx.cs">
+      <DependentUpon>MyButton.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Base\MyButton.aspx.designer.cs">
+      <DependentUpon>MyButton.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -437,6 +505,7 @@
     <Compile Include="Properties\LoginPage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="res\ueditor\net\Uploader.cs" />
     <Compile Include="upload.ashx.cs">
       <DependentUpon>upload.ashx</DependentUpon>
     </Compile>
@@ -466,24 +535,27 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="xcenter\lang\zh-cn\core.config" />
-    <Content Include="xcenter\conf\template.config" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="res\font-awesome\css\Descr.WD3" />
     <Content Include="res\font-awesome\font\Descr.WD3" />
     <Content Include="res\font-awesome\font\fontawesome-webfont.eot" />
     <Content Include="res\font-awesome\font\fontawesome-webfont.eot%40" />
     <Content Include="res\font-awesome\font\fontawesome-webfont.ttf" />
     <Content Include="res\font-awesome\font\fontawesome-webfont.woff" />
-    <Content Include="xcenter\conf\log.config" />
     <Content Include="upload.ashx" />
-    <None Include="xcenter\conf\orm.config" />
-    <None Include="xcenter\conf\orm.config.mysql" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="res\ueditor\net\fileUp.ashx" />
+    <Content Include="res\ueditor\net\getContent.ashx" />
+    <Content Include="res\ueditor\net\getMovie.ashx" />
+    <Content Include="res\ueditor\net\getRemoteImage.ashx" />
+    <Content Include="res\ueditor\net\imageManager.ashx" />
+    <Content Include="res\ueditor\net\imageUp.ashx" />
+    <Content Include="res\ueditor\net\scrawlUp.ashx" />
+    <Content Include="res\ueditor\net\Web.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <ProjectExtensions>
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
@@ -491,7 +563,7 @@
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>20275</DevelopmentServerPort>
-          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <DevelopmentServerVPath>/tt</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
@@ -502,6 +574,16 @@
         </WebProjectProperties>
       </FlavorProperties>
     </VisualStudio>
+    <MonoDevelop>
+      <Properties VerifyCodeBehindFields="True" VerifyCodeBehindEvents="True">
+        <XspParameters Port="8080" Address="127.0.0.1" SslMode="None" SslProtocol="Default" KeyType="None" CertFile="" KeyFile="" PasswordOptions="None" Password="" Verbose="True" />
+        <WebDeployTargets>
+          <Target Name="">
+            <FileCopier Handler="MonoDevelop.Deployment.LocalFileCopyHandler" TargetDirectory="C:\t" ctype="LocalFileCopyConfiguration" />
+          </Target>
+        </WebDeployTargets>
+      </Properties>
+    </MonoDevelop>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

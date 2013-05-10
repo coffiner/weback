@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="RulesMethod.aspx.cs" Inherits="WeChat.Base.RulesMethod" %><!DOCTYPE html>
 <html lang="zh">
 <head>
-    <title>代码处理规则列表-<%=UIConfig("AppName")%></title>
+    <title>代码处理规则列表-Weback</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="../res/bootstrap.min.css" />
     <link rel="stylesheet" href="../res/wlniao-style.css" />
@@ -33,7 +33,7 @@
                                 <div field="RuleName" width="120" headerAlign="center" align="left" allowSort="false" renderer="onRuleName">规则名称</div>
                                 <div field="DoMethod" width="120" headerAlign="center" align="left" allowSort="false" renderer="onDoMethod">调用的代码函数</div>
                                 <div field="RuleHelp" width="360" headerAlign="center" align="left" allowSort="false" renderer="onContent">规则描述</div>
-                                <div field="Guid" width="60" headerAlign="center" align="center" allowSort="false" renderer="onOp">操作</div>
+                                <div field="Guid" width="88" headerAlign="center" align="center" allowSort="false" renderer="onOp">操作</div>
                             </div>
                         </div>
                     </div>
@@ -97,7 +97,80 @@
         return e.value;
     }
     function onOp(e) {
-        return '<a href="javascript:edit(\'' + e.value + '\');">管理</a>&nbsp;<a href="javascript:del(\'' + e.value + '\');">删除</a>';
+        if (e.record.DoMethod) {
+            return '<a href="javascript:edit(\'' + e.value + '\');">编辑</a>&nbsp;<a href="javascript:ConvertAuto(\'' + e.value + '\');">转换</a>&nbsp;<a href="javascript:del(\'' + e.value + '\');">删除</a>';
+        } else {
+            return '<a href="javascript:edit(\'' + e.value + '\');">编辑</a>&nbsp;<a href="javascript:ConvertMethod(\'' + e.value + '\');">转换</a>&nbsp;<a href="javascript:del(\'' + e.value + '\');">删除</a>';
+        }
+    }
+
+    function ConvertAuto(guid) {
+        $.dialog({
+            lock: true,
+            fixed: true,
+            content: '您确定要将当前记录转换为自动回复规则吗？',
+            ok: function () {
+                $.getJSON("rulesauto.aspx", { "action": "convertauto", "Guid": guid }, function (json) {
+                    if (json.success) {
+                        grid.reload();
+                        $.dialog({
+                            time: 2,
+                            lock: true,
+                            fixed: true,
+                            icon: 'succeed',
+                            content: 'Success,操作保存成功！',
+                            close: function () {
+                                grid.reload();
+                            }
+                        });
+                    } else {
+                        $.dialog({
+                            lock: true,
+                            fixed: true,
+                            icon: 'error',
+                            content: json.msg
+                        });
+                    }
+                });
+            },
+            okVal: '是,转换',
+            cancelVal: '取消',
+            cancel: true //为true等价于function(){}
+        });
+    }
+    function ConvertMethod(guid) {
+        $.dialog({
+            lock: true,
+            fixed: true,
+            content: '您确定要将当前记录转换为代码处理规则吗？',
+            ok: function () {
+                $.getJSON("rulesauto.aspx", { "action": "convertmethod", "Guid": guid }, function (json) {
+                    if (json.success) {
+                        grid.reload();
+                        $.dialog({
+                            time: 2,
+                            lock: true,
+                            fixed: true,
+                            icon: 'succeed',
+                            content: 'Success,操作保存成功！',
+                            close: function () {
+                                grid.reload();
+                            }
+                        });
+                    } else {
+                        $.dialog({
+                            lock: true,
+                            fixed: true,
+                            icon: 'error',
+                            content: json.msg
+                        });
+                    }
+                });
+            },
+            okVal: '是,转换',
+            cancelVal: '取消',
+            cancel: true //为true等价于function(){}
+        });
     }
 </script>
 </body>

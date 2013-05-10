@@ -23,10 +23,9 @@ namespace Wlniao.WeChat
     public abstract class ActionBase
     {
         private String fromId = "";
-        private String cmd = "";
-        private String msgContent;
-        private String cmdContent;
-        private Boolean onSession;
+        private String toId = "";
+        private String msgText;
+        private String msgArgs;
         /// <summary>
         /// 消息来源ID
         /// </summary>
@@ -36,45 +35,44 @@ namespace Wlniao.WeChat
             set { fromId = value; }
         }
         /// <summary>
-        /// 执行的命令符
+        /// 发送者ID
         /// </summary>
-        public String Cmd
+        public String ToId
         {
-            get { return cmd; }
-            set { cmd = value; }
+            get { return toId; }
+            set { toId = value; }
         }
         /// <summary>
-        /// 整个消息内容
+        /// 消息内容
         /// </summary>
-        public String MsgContent
+        public String MsgText
         {
-            get { return msgContent; }
-            set { msgContent = value; }
+            get { return msgText; }
+            set { msgText = value; }
         }
         /// <summary>
-        /// 除去命令符后的操作内容
+        /// 参数（已除去命令符）
         /// </summary>
-        public String CmdContent
+        public String MsgArgs
         {
-            get
-            {
-                try
-                {
-                    if (msgContent.StartsWith(cmd))
-                    {
-                        msgContent = msgContent.Substring(cmd.Length).Trim();
-                    }
-                }
-                catch { }
-                return msgContent;
-            }
-        }
+            get { return msgArgs; }
+            set { msgArgs = value; }
+		}
+		/// <summary>
+		/// 标记当前流程执行成功
+		/// </summary>
+		/// <param name="msg"></param>
+		/// <returns></returns>
+		protected string FlagSuccess()
+		{
+			return FlagSuccess("");
+		}
         /// <summary>
         /// 标记当前流程执行成功
         /// </summary>
         /// <param name="msg"></param>
         /// <returns></returns>
-        protected string FlagSuccess(string msg = "")
+        protected string FlagSuccess(string msg)
         {
             string temp = GotoSession();
             if (string.IsNullOrEmpty(msg))
@@ -102,7 +100,7 @@ namespace Wlniao.WeChat
                 try
                 {
                     cmdstr = fans.CallBackText.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)[0];
-                    cmd = BLL.Rules.GetRuleByCode(cmdstr, FromId);
+                    cmd = BLL.Rules.GetRule(cmdstr, FromId);
                 }
                 catch { }
                 try
@@ -124,8 +122,8 @@ namespace Wlniao.WeChat
                         catch { }
                         ActionBase action = (ActionBase)Activator.CreateInstance(type);
                         action.FromId = FromId;
-                        action.Cmd = cmdstr;
-                        action.MsgContent = fans.CallBackText;
+                        action.MsgText = fans.CallBackText;
+                        action.MsgArgs = fans.CallBackText;
                         return type.InvokeMember(methodname, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.InvokeMethod | System.Reflection.BindingFlags.IgnoreCase, null, action, new object[] { }).ToString();
                     }
                     else

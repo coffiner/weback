@@ -20,9 +20,7 @@
     Work: Lead Product Designer @ http://kyruus.com
 
     */
-@font-face {
-  font-family: 'FontAwesome';
-  src: url('../font/fontawesome-webfont.ttf') format('truetype');}
+@font-face { font-family: 'FontAwesome'; src: url('../font/fontawesome-webfont.woff');}
 /*  Font Awesome styles
     ------------------------------------------------------- */
 /* includes sprites.less reset */

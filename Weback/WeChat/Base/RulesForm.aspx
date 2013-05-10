@@ -1,17 +1,19 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="RulesForm.aspx.cs" Inherits="WeChat.Base.RulesForm" %><!DOCTYPE html>
 <html lang="zh">
 <head>
-    <title>基础设置-<%=UIConfig("AppName")%></title>
+    <title>基础设置-Weback</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="../res/bootstrap.min.css" />
     <link rel="stylesheet" href="../res/wlniao-style.css" />
     <link rel="stylesheet" href="../res/wlniao-media.css" />
     <link rel="stylesheet" href="../res/font-awesome/css/font-awesome.css" />
     <link href="../res/miniui/themes/default/miniui.css" rel="stylesheet" type="text/css" />
+    <script src="../res/ueditor/editor_config.js" type="text/javascript"></script>
+    <script src="../res/ueditor/editor_all.js" type="text/javascript"></script>
 </head>
 <body>
 
-<div id="content" style=" margin:0px;">
+<div id="content" style=" margin:0px; height:1200px;">
   <div id="content-header">
     <div id="breadcrumb"> <a href="../main.aspx" title="返回首页" class="tip-bottom"><i class="icon-home"></i>未来鸟微信平台</a> <a href="<%=_GobackUrl %>" title="点击返回规则列表" class="tip-bottom">规则列表</a> <a href="#" class="current">规则详细</a></div>   
   </div>
@@ -167,7 +169,7 @@
                             <div class="control-group" id="divTextContent"  style=" display:none;">
                                 <label class="control-label">文本</label>
                                 <div class="controls">
-                                    <textarea id="TextContent" class="span10" style=" min-width:300px;" rows="7" cols="2" placeholder="需要发送的文本内容。"></textarea>
+                                    <script id="editor" type="text/plain">&nbsp;</script>
                                 </div>
                             </div>
                             <div class="control-group" id="divLinkUrl" style=" display:none;">
@@ -259,6 +261,8 @@
 <script src="../res/miniui/miniui.js" type="text/javascript"></script>
 <script src="../res/miniui/swfupload/swfupload.js" type="text/javascript"></script>
 <script type="text/javascript">
+
+
     mini.parse();
     var grid = mini.get("datagrid");
     grid.load();
@@ -498,7 +502,7 @@
         $('#ThumbPicUrl').val('');
         $('#MusicUrl').val('');
         $('#LinkUrl').val('');
-        $('#TextContent').val('');
+        ue.setContent('');
         $('#ContentStatus').val('normal');
         contentguid = '';
         ContentType = type;
@@ -525,7 +529,7 @@
         $('#ThumbPicUrl').val('');
         $('#MusicUrl').val('');
         $('#LinkUrl').val('');
-        $('#TextContent').val('');
+        ue.setContent('');
         $('#ContentStatus').val('normal');
         contentguid = '';
         ContentType = 'pictext';
@@ -591,6 +595,11 @@
             }
         });
     }
+    //实例化编辑器
+    var ue = UE.getEditor('editor');
+    ue.addListener('ready', function () {
+        this.focus()
+    });
     function editContent(guid, title, type, pic, thumbpic, music, link, text, status) {
         $('#baseFrom').hide();
         $('#codeFrom').hide();
@@ -636,11 +645,13 @@
         $('#ThumbPicUrl').val(thumbpic);
         $('#MusicUrl').val(music);
         $('#LinkUrl').val(link);
-        $('#TextContent').val(getTextareaValue(text));
+        ue.setContent(getTextareaValue(text));
         $('#ContentStatus').val(status);
         ContentType = type;
         contentguid = guid;
     }
+
+
     function submitContent() {
         if (!$('#Title').val()) {
             $.dialog({
@@ -652,14 +663,13 @@
             $('#Title').focus();
             return;
         }
-        if (ContentType == 'text' && !$('#TextContent').val()) {
+        if (ContentType == 'text' && !ue.hasContents()) {
             $.dialog({
                 time: 2,
                 fixed: true,
                 icon: 'error',
                 content: 'Sorry,内容未填写，请填写！'
             });
-            $('#TextContent').focus();
             return;
         }
         if (ContentType == 'pictext' && !$('#PicUrl').val()) {
@@ -682,6 +692,8 @@
             $('#MusicUrl').focus();
             return;
         }
+        var contenthtml = ue.getPlainTxt();
+        contenthtml = htmlEncode(ue.getContent());
         $.getJSON("rulesform.aspx", { "action": "setcontent", "RuleGuid": "<%=_Guid %>"
         , "guid": contentguid
         , "ContentType": ContentType
@@ -690,7 +702,7 @@
         , "ThumbPicUrl": $('#ThumbPicUrl').val()
         , "MusicUrl": $('#MusicUrl').val()
         , "LinkUrl": $('#LinkUrl').val()
-        , "TextContent": $('#TextContent').val()
+        , "TextContent": contenthtml
         , "ContentStatus": $('#ContentStatus').val()
         }, function (json) {
             if (json.success) {
@@ -783,6 +795,18 @@
             cancelVal: '取消',
             cancel: true //为true等价于function(){}
         });
+    }
+
+    function htmlEncode(str) {
+        var div = document.createElement("div");
+        var text = document.createTextNode(str);
+        div.appendChild(text);
+        return div.innerHTML;
+    }
+    function htmlDecode(str) {
+        var div = document.createElement("div");
+        div.innerHTML = str;
+        return div.innerHTML;
     }
 </script>
 </body>

@@ -41,7 +41,6 @@
   <ItemGroup>
     <Compile Include="Demo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Base.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Wlniao.WeChat\Wlniao.WeChat.csproj">

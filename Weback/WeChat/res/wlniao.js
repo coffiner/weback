@@ -139,3 +139,14 @@ function getTextareaValue(text) {
     }
     return return_str;
 }
+function htmlEncode(str) {
+    var div = document.createElement("div");
+    var text = document.createTextNode(str);
+    div.appendChild(text);
+    return div.innerHTML;
+}
+function htmlDecode(str) {
+    var div = document.createElement("div");
+    div.innerHTML = str;
+    return div.innerHTML;
+}

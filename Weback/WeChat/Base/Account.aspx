@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Account.aspx.cs" Inherits="WeChat.Base.Account" %><!DOCTYPE html>
 <html lang="zh">
 <head>
-    <title>帐号设置-<%=UIConfig("AppName")%></title>
+    <title>帐号设置-Weback</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="../res/bootstrap.min.css" />
     <link rel="stylesheet" href="../res/wlniao-style.css" />

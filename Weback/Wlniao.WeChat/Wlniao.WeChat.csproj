@@ -26,21 +26,19 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>
-    </DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Release\Wlniao.WeChat.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="XCore">
       <HintPath>..\..\XCore.dll</HintPath>
     </Reference>
+    <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActionBase.cs" />
@@ -52,7 +50,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Model\Fans.cs" />
+    <Compile Include="Model\Menus.cs" />
     <Compile Include="Model\Rules.cs" />
+    <Compile Include="MP.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Api.cs">
       <SubType>ASPXCodeBehind</SubType>

@@ -17,13 +17,22 @@ using System.Text;
 namespace Wlniao.WeChat.BLL
 {
     public class Fans : System.ORM.CommonBase<Model.Fans>
-    {
+	{
+		/// <summary>
+		/// 检查粉丝帐号（已存在则直接返回粉丝信息，不存在则添加新粉丝）
+		/// </summary>
+		/// <param name="openid"></param>
+		/// <returns></returns>
+		public static Model.Fans Check(string openid)
+		{
+			return Check(openid,"");
+		}
         /// <summary>
         /// 检查粉丝帐号（已存在则直接返回粉丝信息，不存在则添加新粉丝）
         /// </summary>
         /// <param name="openid"></param>
         /// <returns></returns>
-        public static Model.Fans Check(string openid, string text = "")
+        public static Model.Fans Check(string openid, string text)
         {
             Model.Fans fans = GetBy("WeChatOpenId", openid);
             if (fans == null)
@@ -47,37 +56,18 @@ namespace Wlniao.WeChat.BLL
             return fans;
         }
         /// <summary>
-        /// 开始新的会话
-        /// </summary>
-        /// <param name="openid"></param>
-        /// <returns></returns>
-        public static Model.Fans NewSession(string openid, string GoOnCmd, string DoMethod, string CmdContent, string CallBackText)
-        {
-            Model.Fans fans = GetBy("WeChatOpenId", openid);
-            if (fans != null)
-            {
-                fans.GoOnCmd = GoOnCmd;
-                fans.DoMethod = DoMethod;
-                fans.CmdContent = CmdContent;
-                fans.CallBackText = CallBackText;
-                fans.LastCmdTime = DateTools.GetNow();
-                fans.update(new string[] { "GoOnCmd", "DoMethod", "CmdContent", "CallBackText", "LastCmdTime" });
-            }
-            return fans;
-        }
-        /// <summary>
         /// 设置会话
         /// </summary>
         /// <param name="openid"></param>
         /// <returns></returns>
-        public static Model.Fans SetSession(string openid, string GoOnCmd, string DoMethod, string CmdContent, string CallBackText)
+        public static Model.Fans SetSession(string openid, string GoOnCmd, string DoMethod, string MsgArgs, string CallBackText)
         {
             Model.Fans fans = GetBy("WeChatOpenId", openid);
             if (fans != null)
             {
                 fans.GoOnCmd = GoOnCmd;
                 fans.DoMethod = DoMethod;
-                fans.CmdContent = CmdContent;
+                fans.CmdContent = MsgArgs;
                 fans.CallBackText = CallBackText;
                 fans.LastCmdTime = DateTools.GetNow();
                 fans.update(new string[] { "GoOnCmd", "DoMethod", "CmdContent", "CallBackText", "LastCmdTime" });
@@ -88,22 +78,24 @@ namespace Wlniao.WeChat.BLL
         /// 设置会话参数
         /// </summary>
         /// <param name="openid"></param>
+        /// <param name="MsgArgs"></param>
         /// <returns></returns>
-        public static Model.Fans SetCmdContent(string openid, string CmdContent)
+        public static Model.Fans SetGoOnCmd(string openid, string MsgArgs)
         {
             Model.Fans fans = GetBy("WeChatOpenId", openid);
-            if (fans != null)
+            if (fans != null&&!string.IsNullOrEmpty(MsgArgs))
             {
-                fans.CmdContent = CmdContent;
+                fans.GoOnCmd += Rules.Separation[0] + MsgArgs;
                 fans.LastCmdTime = DateTools.GetNow();
-                fans.update(new string[] { "CmdContent", "LastCmdTime" });
+                fans.update(new string[] { "GoOnCmd", "LastCmdTime" });
             }
             return fans;
         }
         /// <summary>
         /// 设置昵称
         /// </summary>
-        /// <param name="openid"></param>
+        /// <param name="openid">用户Id</param>
+        /// <param name="nickname">昵称</param>
         /// <returns></returns>
         public static Model.Fans SetNickName(string openid,string nickname)
         {
@@ -111,7 +103,6 @@ namespace Wlniao.WeChat.BLL
             if (fans != null)
             {
                 fans.NickName = nickname;
-                fans.LastCmdTime = DateTools.GetNow();
                 fans.update(new string[] { "NickName"});
             }
             return fans;
